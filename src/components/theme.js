@@ -1,0 +1,51 @@
+export const theme = {
+  colors: {
+    white: "#fff",
+    black: "#404040",
+    primary: "#aa5d00",
+    "primary-active": "#7b341d",
+    background: "#fdfbf6",
+    overlay: "rgba(253, 251, 246, 0.8)",
+  },
+  fonts: {
+    body: '"Roboto", sans-serif',
+    headings: '"Source Serif Pro", serif',
+  },
+  fontWeights: {
+    body: "300",
+    "body-bold": "500",
+    headings: "400",
+    "headings-bold": "700",
+  },
+  fontSizes: {
+    body: "1.125",
+    "body-small": "1",
+    "body-large": "1.25",
+    "heading-one": "2.2",
+    "heading-two": "2.1",
+    "heading-three": "2",
+    "heading-four": "1.9",
+    "heading-five": "1.8",
+    "heading-six": "1.7",
+  },
+  widths: {
+    "outer-width": "100%",
+    "container-width": "540px",
+    "container-width-sm": "720px",
+    "container-width-md": "992px",
+    "container-width-lg": "1280px",
+  },
+  margins: {
+    bottom: "2",
+    top: "2",
+    left: "2",
+    right: "2",
+    center: "auto",
+  },
+  paddings: {
+    bottom: "2",
+    top: "2",
+    left: "1",
+    right: "1",
+  },
+}

@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ description, lang, meta, title, data }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -25,23 +25,49 @@ function SEO({ description, lang, meta, title }) {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const { SeoTitle, SeoKeywords, SeoDescription, SeoImage } = data.nodes[0]
+  const metaDescription = description || SeoDescription
+  const ImgAlt = SeoTitle || SeoImage.description
+
+  if (lang === "") {
+    lang = "de"
+  }
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={SeoTitle}
+      titleTemplate={`%s | ${title}`}
       meta={[
         {
           name: `description`,
           content: metaDescription,
         },
         {
+          name: `keywords`,
+          content: SeoKeywords,
+        },
+        {
           property: `og:title`,
-          content: title,
+          content: `${SeoTitle} | ${title}`,
+        },
+        {
+          property: `og:image`,
+          content: SeoImage.fluid.src,
+        },
+        {
+          property: `og:image:type`,
+          content: `image/jpeg`,
+        },
+        {
+          property: `og:image:width`,
+          content: `400`,
+        },
+        {
+          property: `og:image:alt`,
+          content: ImgAlt,
         },
         {
           property: `og:description`,
@@ -61,7 +87,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: `${SeoTitle} | ${title}`,
         },
         {
           name: `twitter:description`,
