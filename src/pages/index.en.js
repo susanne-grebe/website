@@ -24,7 +24,7 @@ import Footer from "../components/footer/footer"
 const IndexPage = ({ data, location }) => {
   return (
     <Layout>
-      <SEO title="Startseite" data={data.seoEN} lang="en" />
+      <SEO title="Home" data={data.seoEN} lang="en" />
       <JsonLd data={data.localBusinessEN.nodes[0]} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={data.heroEN} />
