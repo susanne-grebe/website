@@ -49,13 +49,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Susanne Grebe Coaching, Mediation & Workshops`,
+        short_name: `Susanne Grebe`,
         start_url: `/`,
-        background_color: `#663399`, // TODO: Change color
-        theme_color: `#663399`, // TODO: Change color
+        background_color: `#fdfbf6`,
+        theme_color: `#fdfbf6`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // TODO: Change logo icon
+        icon: `src/images/Logo 1 mobile.png`,
       },
     },
     {
