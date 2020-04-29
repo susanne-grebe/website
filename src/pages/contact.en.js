@@ -297,9 +297,8 @@ const IndexPage = ({ data, location }) => {
             <Form
               name="contact"
               method="POST"
-              data-netlify="true"
               netlify-honeypot="bot-field"
-              autoComplete="off"
+              data-netlify="true"
             >
               <FormGroup data-visible="false">
                 <FormLabel htmlFor="botfield">
