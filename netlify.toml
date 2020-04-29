@@ -9,9 +9,7 @@ package = "netlify-plugin-hashfiles"
 
 [plugins.inputs]
   entryPoints = [
-    "*.html",
-	"*.js",
-	"*.css"
+    "*.html"
   ]
 
   staticDir = "/static/"
