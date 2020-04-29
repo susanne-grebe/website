@@ -304,6 +304,7 @@ const IndexPage = ({ data, location }) => {
               data-netlify="true"
               action="/pages/erfolgreich"
             >
+              <input type="hidden" name="form-name" value="contact" />
               <FormGroup data-visible="false">
                 <FormLabel htmlFor="botfield">
                   <h3>Füllen Sie das nicht aus, wenn Sie ein Mensch sind</h3>
