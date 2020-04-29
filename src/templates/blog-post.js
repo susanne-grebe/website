@@ -122,6 +122,7 @@ const BlogListPage = ({ data, pageContext }) => {
       <Footer
         data={data.footerDE.nodes}
         logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        lang="de"
       />
     </Layout>
   )
