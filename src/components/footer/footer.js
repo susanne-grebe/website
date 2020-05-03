@@ -51,6 +51,8 @@ const Footer = ({ data, logo, lang }) => {
       max-width: 720px;
       &:nth-of-type(2) {
         flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
       }
     }
     @media (min-width: 992px) {
@@ -100,16 +102,9 @@ const Footer = ({ data, logo, lang }) => {
       border-color: #aa5d00;
       color: #fff !important;
     }
-    &:disabled,
-    &[disabled] {
-      color: #404040;
-      border-color: #404040;
-      &:hover,
-      &:focus {
-        background-color: transparent;
-        color: #404040;
-        border-color: #404040;
-      }
+    @media (min-width: 768px) {
+      width: 250px;
+      margin: 1.5rem 0;
     }
   `
 
@@ -129,7 +124,8 @@ const Footer = ({ data, logo, lang }) => {
     flex-direction: row;
     margin-bottom: 2rem;
     @media (min-width: 768px) {
-      width: 50%;
+      width: 80%;
+      margin: 0;
     }
   `
 
@@ -140,6 +136,9 @@ const Footer = ({ data, logo, lang }) => {
     align-items: flex-start;
     padding-left: 1rem;
     border-left: 1px solid #aa5d00;
+    @media (min-width: 768px) {
+      margin: 1.5rem 0;
+    }
   `
 
   const Copyright = styled.p`

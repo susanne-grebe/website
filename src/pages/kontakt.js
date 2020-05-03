@@ -216,8 +216,6 @@ const SocialProfileItem = styled.li`
 const IndexPage = ({ data, location }) => {
   const [checked, setChecked] = useState(false)
 
-  console.log(checked)
-
   const heroData = {
     nodes: [
       {

@@ -47,7 +47,7 @@ const Aboutme = ({ aboutmeData, lang }) => {
   const AboutInner = styled.div`
     position: relative;
     z-index: 2;
-    margin-bottom: ${theme.margins.bottom}rem;
+    margin-bottom: 4rem;
     padding-left: 0;
     padding-right: 0;
     margin-left: auto;

@@ -80,7 +80,6 @@ const PostContent = styled.div`
 `
 
 const BlogListPage = ({ data, pageContext }) => {
-  console.log(data)
   const heroData = {
     nodes: [
       {
