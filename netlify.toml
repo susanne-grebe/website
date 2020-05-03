@@ -16,7 +16,3 @@ package = "netlify-plugin-gatsby-cache"
     no-cache,
     no-store,
     must-revalidate'''
-
-    age = 0
-
-    content-encoding = '''gzip'''
