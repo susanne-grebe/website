@@ -58,6 +58,14 @@ const Footer = ({ data, logo, lang }) => {
     @media (min-width: 992px) {
       flex-direction: row;
       max-width: 992px;
+      justify-content: space-between;
+      align-items: center;
+      h3,
+      a,
+      p,
+      nav {
+        margin-bottom: 1.5rem;
+      }
     }
     @media (min-width: 1025px) {
       max-width: 1280px;
@@ -143,6 +151,9 @@ const Footer = ({ data, logo, lang }) => {
 
   const Copyright = styled.p`
     text-align: center;
+    @media (min-width: 992px) {
+      text-align: left;
+    }
   `
 
   const FooterNav = styled.nav`
@@ -152,6 +163,7 @@ const Footer = ({ data, logo, lang }) => {
     text-align: center;
     @media (min-width: 768px) {
       flex-direction: row;
+      justify-content: flex-end;
     }
   `
 
