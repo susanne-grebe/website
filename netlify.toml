@@ -11,7 +11,12 @@ package = "netlify-plugin-gatsby-cache"
     X-XSS-Protection = "1; mode=block"
 
     #  Multi-value headers are expressed with multi-line strings
-	cache-control = '''
-	max-age=31536000,
-	public,
-	immutable'''
+    cache-control = '''
+    max-age=31557600,
+    no-cache,
+    no-store,
+    must-revalidate'''
+
+    age = 0
+
+    content-encoding = '''gzip'''

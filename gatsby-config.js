@@ -8,6 +8,7 @@ module.exports = {
     siteUrl: "https://www.susanne-grebe.de",
   },
   plugins: [
+    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-emotion`,
