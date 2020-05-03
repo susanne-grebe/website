@@ -66,7 +66,8 @@ export default ({ data, pageContext }) => {
       div {
         padding-left: 2rem;
         padding-right: 0;
-        max-width: 60%;
+        max-width: 720px;
+        width: 100%;
       }
       &[data-layout="no-image"] {
         flex-direction: column;
