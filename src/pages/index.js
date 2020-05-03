@@ -111,7 +111,7 @@ export const LayoutQuery = graphql`
         homePageHeroSubtitle
         homePageHeroTitle
         homePageHeroBackgroundImage {
-          fluid(quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
             ...GatsbyContentfulFluid_withWebp
           }
           description
