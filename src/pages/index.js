@@ -65,11 +65,6 @@ export const LayoutQuery = graphql`
             maxWidth: 520
             quality: 80
             cropFocus: CENTER
-            jpegQuality: 80
-            pngQuality: 80
-            webpQuality: 80
-            srcSetBreakpoints: [200, 340, 520, 800, 890]
-            background: "rgba(253, 251, 246, 0.8)"
           ) {
             ...GatsbyContentfulFluid_withWebp
           }
@@ -79,11 +74,6 @@ export const LayoutQuery = graphql`
             maxWidth: 520
             quality: 80
             cropFocus: CENTER
-            jpegQuality: 80
-            pngQuality: 80
-            webpQuality: 80
-            srcSetBreakpoints: [200, 340, 520, 800, 890]
-            background: "rgba(253, 251, 246, 0.8)"
           ) {
             ...GatsbyContentfulFluid_withWebp
           }
@@ -120,11 +110,6 @@ export const LayoutQuery = graphql`
             maxWidth: 520,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
-            srcSetBreakpoints: [200, 340, 520, 800, 890],
-            background: "rgba(253, 251, 246, 0.8)"
           ) {
             ...GatsbyContentfulFluid_withWebp
           }
@@ -142,11 +127,6 @@ export const LayoutQuery = graphql`
             maxWidth: 800,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
-            srcSetBreakpoints: [200, 340, 520, 800, 890],
-            background: "rgba(253, 251, 246, 0.8)"
           ) {
             ...GatsbyContentfulFluid_withWebp
           }
@@ -162,11 +142,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
-            srcSetBreakpoints: [200, 340, 520, 800, 890],
-            background: "rgba(253, 251, 246, 0.8)"
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -190,9 +165,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -216,9 +188,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
           ) {
             ...GatsbyContentfulFixed_withWebp
           }
@@ -234,9 +203,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -254,9 +220,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -267,9 +230,6 @@ export const LayoutQuery = graphql`
             width: 600,
             quality: 80,
             cropFocus: CENTER,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80,
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -286,9 +246,6 @@ export const LayoutQuery = graphql`
             width: 600,
             cropFocus: CENTER,
             quality: 80,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
@@ -330,9 +287,6 @@ export const LayoutQuery = graphql`
               width: 100,
               quality: 80,
               height: 100,
-              jpegQuality: 80,
-              pngQuality: 80,
-              webpQuality: 80
             ) {
               ...GatsbyContentfulFixed_withWebp_noBase64
             }
@@ -364,9 +318,6 @@ export const LayoutQuery = graphql`
               maxWidth: 624,
               quality: 80,
               cropFocus: CENTER,
-              jpegQuality: 80,
-              pngQuality: 80,
-              webpQuality: 80,
             ) {
               ...GatsbyContentfulFluid_withWebp
             }
@@ -393,10 +344,6 @@ export const LayoutQuery = graphql`
             width: 60,
             height: 60,
             cropFocus: CENTER,
-            quality: 80,
-            jpegQuality: 80,
-            pngQuality: 80,
-            webpQuality: 80
           ) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
