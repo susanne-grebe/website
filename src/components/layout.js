@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { ThemeProvider } from "styled-components"
-import "./styles/main.scss"
 import { theme } from "./theme"
 import { createGlobalStyle } from "styled-components"
 
+import "./styles/main.scss"
 const GlobalStyle = createGlobalStyle`
   body {
     color: ${theme.colors.black};
@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights["body-bold"]};
     transition: all 300ms ease-in-out;
-    text-decoration: underline;
     &:hover {
       color: ${theme.colors["primary-active"]};
       text-decoration: none !important;
