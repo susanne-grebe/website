@@ -138,7 +138,7 @@ export const BlogQuery = graphql`
         blogPageSubtitle
         blogPageTitle
         blogPageHeroImage {
-          fluid(quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
             ...GatsbyContentfulFluid_withWebp
           }
           description
@@ -176,7 +176,7 @@ export const BlogQuery = graphql`
           blogPostDescription
           blogPostTitle
           blogPostImage {
-            fluid(quality: 80, cropFocus: CENTER) {
+            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
               ...GatsbyContentfulFluid_withWebp
             }
             description
@@ -193,7 +193,7 @@ export const BlogQuery = graphql`
           }
         }
         authorImage {
-          fluid(quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
             ...GatsbyContentfulFluid_withWebp
           }
           description
@@ -214,7 +214,7 @@ export const BlogQuery = graphql`
         node {
           blogPostTitle
           blogPostImage {
-            fluid(quality: 80, cropFocus: CENTER) {
+            fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
               ...GatsbyContentfulFluid_withWebp
             }
             description

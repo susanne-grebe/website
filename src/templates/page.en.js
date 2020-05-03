@@ -285,7 +285,7 @@ export const PageQuery = graphql`
       pageSlug
       pageSlogan
       pageHeroBackgroundImage {
-        fluid(quality: 80, cropFocus: CENTER) {
+        fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
       }
@@ -318,7 +318,7 @@ export const PageQuery = graphql`
             }
           }
           pageSectionImage {
-            fluid(quality: 80, cropFocus: CENTER) {
+            fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
               ...GatsbyContentfulFluid_withWebp_noBase64
             }
             description
@@ -353,7 +353,7 @@ export const PageQuery = graphql`
         footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
-          fixed(width: 600, cropFocus: CENTER, quality: 80) {
+          fixed(width: 60, cropFocus: CENTER, quality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description

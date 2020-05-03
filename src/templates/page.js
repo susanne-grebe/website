@@ -355,7 +355,7 @@ export const PageQuery = graphql`
         footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
-          fixed(width: 600, cropFocus: CENTER, quality: 80) {
+          fixed(width: 60, cropFocus: CENTER, quality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description

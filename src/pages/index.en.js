@@ -110,7 +110,7 @@ export const LayoutQuery = graphql`
         homePageHeroSubtitle
         homePageHeroTitle
         homePageHeroBackgroundImage {
-          fluid(quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
             ...GatsbyContentfulFluid_withWebp
           }
           description
@@ -121,7 +121,7 @@ export const LayoutQuery = graphql`
       nodes {
         homePageCoachingFirstColContent
         homePageCoachingFirstColImage {
-          fixed(quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -265,7 +265,7 @@ export const LayoutQuery = graphql`
             }
           }
           blogPostImage {
-            fluid(quality: 80, cropFocus: CENTER) {
+            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
               ...GatsbyContentfulFluid_withWebp
             }
             description
@@ -287,7 +287,7 @@ export const LayoutQuery = graphql`
         footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
-          fixed(width: 600, cropFocus: CENTER, quality: 80) {
+          fixed(width: 60, cropFocus: CENTER, quality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
