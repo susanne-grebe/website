@@ -83,22 +83,46 @@ export default ({ data }) => {
       />
       <SocialProfiles>
         <SocialProfileItem>
-          <a href={authorFacebook} target="_blank" rel="noopener noreferrer">
+          <a
+            href={authorFacebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="facebook profile"
+            title="susanne grebe's facebook"
+          >
             <FaFacebookSquare />
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
-          <a href={authorInstagram} target="_blank" rel="noopener noreferrer">
+          <a
+            href={authorInstagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="instagram profile"
+            title="susanne grebe's instagram"
+          >
             <FaInstagramSquare />
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
-          <a href={authorLinkedIn} target="_blank" rel="noopener noreferrer">
+          <a
+            href={authorLinkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="linkedin profile"
+            title="susanne grebe's linkedin"
+          >
             <FaLinkedin />
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
-          <a href={authorTwitter} target="_blank" rel="noopener noreferrer">
+          <a
+            href={authorTwitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="twitter profile"
+            title="susanne grebe's twitter"
+          >
             <FaTwitterSquare />
           </a>
         </SocialProfileItem>
