@@ -169,9 +169,9 @@ const Footer = ({ data, logo, lang }) => {
 
   const pathContact = lang === "de" ? `/kontakt` : `/en/contact`
   const pathAbout = lang === "de" ? `/uber-mich` : `/en/about-me`
-  const pathCookie = lang === "de" ? `/cookie-richtlinie` : `/en/cookie-policy`
+  const pathCookie = lang === "de" ? `/impressum` : `/en/legal-notice`
   const pathData = lang === "de" ? `/datenschutz` : `/en/data-protection`
-  const pathSitemap = lang === "de" ? `/seitenverzeichnis` : `/en/sitemap`
+  // const pathSitemap = lang === "de" ? `/seitenverzeichnis` : `/en/sitemap`
   const pathLanguage = lang === "de" ? `/en` : `/`
   return (
     <Footer>
@@ -213,7 +213,7 @@ const Footer = ({ data, logo, lang }) => {
             className="footer-link mt-2 mt-md-1 mb-1 mt-lg-0 mb-lg-0"
             to={pathCookie}
           >
-            {lang === "de" ? `Cookie-Zustimmung` : `Cookie Policy`}
+            {lang === "de" ? `Impressum` : `Legal Notice`}
           </A>
           <A
             className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
@@ -221,12 +221,13 @@ const Footer = ({ data, logo, lang }) => {
           >
             {lang === "de" ? `Datenschutz` : `Data Protection`}
           </A>
-          <A
+          {/* TODO: create sitemap page */}
+          {/* <A
             className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
             to={pathSitemap}
           >
             {lang === "de" ? `Seitenverzeichnis` : `Sitemap`}
-          </A>
+          </A> */}
           <A
             className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
             to={pathLanguage}
