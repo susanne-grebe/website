@@ -39,6 +39,7 @@ const Wrapper = styled.div`
   @media (min-width: 992px) {
     max-width: 1280px;
     flex-direction: row;
+    justify-content: space-between;
     main {
       width: 65%;
       padding-right: 4rem;
