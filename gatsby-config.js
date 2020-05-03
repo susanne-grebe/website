@@ -2,10 +2,10 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Susanne Grebe`,
+    description: `Coaching | Seminare | Beratung | Mediation Im Raum Aachen Mit mehr als 30 Jahren solide praktischer Erfahrung in zahlreichen Unternehmens- und Geschäftsbereichen.`,
     author: `@susanne-grebe`,
-    siteUrl: "https://susanne-grebe.de",
+    siteUrl: "https://www.susanne-grebe.de",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -96,7 +96,55 @@ module.exports = {
       },
     },
     `gatsby-plugin-transition-link`,
-
+    {
+      resolve: `gatsby-plugin-advance-sitemap`,
+      options: {
+        query: `
+          {
+            allContentfulBlogPost {
+              edges {
+                node {
+                  blogPostTitle
+                  blogPostSlug
+                  blogPostImage {
+                    fluid {
+                      src
+                    }
+                  }
+                  id
+                  createdAt
+                  updatedAt
+                }
+              }
+            }
+          }
+        `,
+      },
+      mapping: {
+        // Each data type can be mapped to a predefined sitemap
+        // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
+        // The default sitemap - if none is passed - will be pages
+        allContentfulBlogPost: {
+          sitemap: `posts`,
+        },
+      },
+      exclude: [
+        `/datenschutz`,
+        `/en.data-protection`,
+        `/impressum`,
+        `/en/legal-notice`,
+        `/erfolgreach/`,
+        `/kontakt/`,
+        `/en/contact/`,
+        `/seitenverzeichnis/`,
+        `/en/sitemap/`,
+        `/404/`,
+        `/en/404/`,
+        `/404.html`,
+      ],
+      createLinkInHead: true, // optional: create a link in the `<head>` of your site
+      addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
