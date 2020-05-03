@@ -81,7 +81,34 @@ module.exports = {
         siteUrl: `https://www.susanne-grebe.de`,
       },
     },
-    `gatsby-plugin-gdpr-cookies`,
+    {
+      resolve: `gatsby-plugin-gdpr-cookies`,
+      options: {
+        googleAnalytics: {
+          trackingId: process.env.GOOGLE_ANALYTICS, // leave empty if you want to disable the tracker
+          cookieName: "susanne-grebe-gdpr-google-analytics", // default
+          anonymize: true, // default
+        },
+        // defines the environments where the tracking should be available  - default is ["production"]
+        environments: ["production", "development"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-cookiehub-banner`,
+      options: {
+        // The ID is part of the CookieHub URL: https://cookiehub.net/cc/YOUR_COOKIEHUB_ID.js
+        cookieHubId: process.env.COOKIEHUB_API,
+        // Optional parameter (default false) - Use new v2 API.
+        cookieHubV2Api: true,
+        // Categories configured with CookieHub
+        categories: [
+          {
+            categoryName: "analytics", // Unique id of the category which is set by Cookiehub.
+            cookieName: "susanne-grebe-google-analytics-gdpr_cookies-enabled", // Your custom cookie name
+          },
+        ],
+      },
+    },
     {
       resolve: "gatsby-plugin-robots-txt",
       options: {
@@ -112,6 +139,29 @@ module.exports = {
           `/en/sitemap`,
           `/404.html`,
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: process.env.GOOGLE_ANALYTICS,
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Enables Google Optimize using your container Id
+        optimizeId: process.env.GOOGLE_WEBSTREAM,
+        // Defers execution of google analytics script after page load
+        defer: true,
+        // Any additional optional fields
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: "https://susanne-grebe.de",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
