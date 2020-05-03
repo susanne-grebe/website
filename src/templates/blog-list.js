@@ -60,9 +60,20 @@ const BlogListPage = ({ data, pageContext }) => {
     ],
   }
 
+  const seoData = {
+    nodes: [
+      {
+        SeoTitle: data.blogDE.nodes[0].blogPageTitle,
+        SeoKeywords: data.seoDE.nodes[0].blogPostKeywords,
+        SeoDescription: data.seoDE.nodes[0].blogPostDescription,
+        SeoImage: data.blogDE.nodes[0].blogPageHeroImage,
+      },
+    ],
+  }
+
   return (
     <Layout>
-      <SEO title="blog" data={data.seoDE} lang="de" />
+      <SEO title="blog" data={seoData} lang="de" />
       <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
       <Hero heroData={heroData} />
       <Wrapper>

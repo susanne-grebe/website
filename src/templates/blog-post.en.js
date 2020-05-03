@@ -91,9 +91,20 @@ const BlogListPage = ({ data, pageContext }) => {
     ],
   }
 
+  const seoData = {
+    nodes: [
+      {
+        SeoTitle: data.postsEN.edges[0].node.blogPostTitle,
+        SeoKeywords: data.postsEN.edges[0].node.blogPostKeywords,
+        SeoDescription: data.postsEN.edges[0].node.blogPostDescription,
+        SeoImage: data.postsEN.edges[0].node.blogPostImage,
+      },
+    ],
+  }
+
   return (
     <Layout>
-      <SEO title="blog" data={data.seoEN} lang="en" />
+      <SEO title="Susanne Grebe" data={seoData} lang="en" />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={heroData} />
       <Wrapper>

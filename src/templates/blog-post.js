@@ -107,7 +107,7 @@ const BlogListPage = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <SEO title="blog" data={seoData} lang="de" />
+      <SEO title="Susanne Grebe" data={seoData} lang="de" />
       <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
       <Hero heroData={heroData} />
       <Wrapper>
