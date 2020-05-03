@@ -105,6 +105,11 @@ const Mediation = ({ mediationData, lang }) => {
       min-width: 500px !important;
       height: 330px !important;
     }
+    @media (min-width: 1024px) and (min-height: 768px) {
+      max-width: 350px !important;
+      min-width: 350px !important;
+      width: 100% !important;
+    }
   `
 
   const MediationContent = styled.div`
