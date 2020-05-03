@@ -61,12 +61,25 @@ export const LayoutQuery = graphql`
         seoCompanyDescription
         seoCompanyEmail
         seoCompanyImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+          fluid(
+            maxWidth: 520
+            quality: 80
+            cropFocus: CENTER
+            jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80
+            srcSetBreakpoints: [200, 340, 520, 800, 890]
+            background: 'rgba(253, 251, 246, 0.8)'
+          ) {
             ...GatsbyContentfulFluid_withWebp
           }
         }
         seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80
+            srcSetBreakpoints: [200, 340, 520, 800, 890]
+            background: 'rgba(253, 251, 246, 0.8)') {
             ...GatsbyContentfulFluid_withWebp
           }
         }
@@ -98,7 +111,11 @@ export const LayoutQuery = graphql`
         SeoKeywords
         SeoDescription
         SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80
+            srcSetBreakpoints: [200, 340, 520, 800, 890]
+            background: 'rgba(253, 251, 246, 0.8)') {
             ...GatsbyContentfulFluid_withWebp
           }
           description
@@ -111,7 +128,11 @@ export const LayoutQuery = graphql`
         homePageHeroSubtitle
         homePageHeroTitle
         homePageHeroBackgroundImage {
-          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
+          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80
+            srcSetBreakpoints: [200, 340, 520, 800, 890]
+            background: 'rgba(253, 251, 246, 0.8)') {
             ...GatsbyContentfulFluid_withWebp
           }
           description
@@ -122,7 +143,11 @@ export const LayoutQuery = graphql`
       nodes {
         homePageCoachingFirstColContent
         homePageCoachingFirstColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80
+            srcSetBreakpoints: [200, 340, 520, 800, 890]
+            background: 'rgba(253, 251, 246, 0.8)') {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -141,7 +166,9 @@ export const LayoutQuery = graphql`
         homePageCoachingSecondColTitle
         homePageCoachingThirdColContent
         homePageCoachingThirdColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -160,7 +187,9 @@ export const LayoutQuery = graphql`
           }
         }
         homePageMediationImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp
           }
           description
@@ -171,7 +200,9 @@ export const LayoutQuery = graphql`
       nodes {
         homePageWorkshopsFirstColContent
         homePageWorkshopsFirstColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -184,13 +215,17 @@ export const LayoutQuery = graphql`
         homePageWorkshopsThirdColContent
         homePageWorkshopsThirdColTitle
         homePageWorkshopsThirdColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
         }
         homePageWorkshopsSecondColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
+          fixed(width: 600, quality: 80, cropFocus: CENTER,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -202,7 +237,9 @@ export const LayoutQuery = graphql`
       nodes {
         homePageAboutMeHeading
         homePageAboutMeImage {
-          fixed(width: 600, cropFocus: CENTER, quality: 80) {
+          fixed(width: 600, cropFocus: CENTER, quality: 80, jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
@@ -239,7 +276,9 @@ export const LayoutQuery = graphql`
       edges {
         node {
           customerReviewsAvatar {
-            fixed(width: 100, quality: 80, height: 100) {
+            fixed(width: 100, quality: 80, height: 100, jpegQuality: 80
+              pngQuality: 80
+              webpQuality: 80) {
               ...GatsbyContentfulFixed_withWebp_noBase64
             }
             description
@@ -266,7 +305,9 @@ export const LayoutQuery = graphql`
             }
           }
           blogPostImage {
-            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
+            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER,jpegQuality: 80
+              pngQuality: 80
+              webpQuality: 80) {
               ...GatsbyContentfulFluid_withWebp
             }
             description
@@ -288,7 +329,9 @@ export const LayoutQuery = graphql`
         footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
+          fixed(width: 60, height: 60, cropFocus: CENTER, quality: 80,jpegQuality: 80
+            pngQuality: 80
+            webpQuality: 80) {
             ...GatsbyContentfulFixed_withWebp_noBase64
           }
           description
