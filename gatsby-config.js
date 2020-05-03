@@ -97,53 +97,22 @@ module.exports = {
     },
     `gatsby-plugin-transition-link`,
     {
-      resolve: `gatsby-plugin-advanced-sitemap`,
+      resolve: `gatsby-plugin-sitemap`,
       options: {
-        query: `
-          {
-            allContentfulBlogPost {
-              edges {
-                node {
-                  blogPostTitle
-                  blogPostSlug
-                  blogPostImage {
-                    fluid {
-                      src
-                    }
-                  }
-                  id
-                  createdAt
-                  updatedAt
-                }
-              }
-            }
-          }
-        `,
+        output: `/sitemap.xml`,
+        exclude: [
+          `/impressum`,
+          `/datenschutz`,
+          `/en/legal-notice`,
+          `/en/data-protection`,
+          `/en/404/`,
+          `/404/`,
+          `/erfolgreich/`,
+          `/seitenverzeichnis`,
+          `/en/sitemap`,
+          `/404.html`,
+        ],
       },
-      mapping: {
-        // Each data type can be mapped to a predefined sitemap
-        // Routes can be grouped in one of: posts, tags, authors, pages, or a custom name
-        // The default sitemap - if none is passed - will be pages
-        allContentfulBlogPost: {
-          sitemap: `posts`,
-        },
-      },
-      exclude: [
-        `/datenschutz`,
-        `/en.data-protection`,
-        `/impressum`,
-        `/en/legal-notice`,
-        `/erfolgreach/`,
-        `/kontakt/`,
-        `/en/contact/`,
-        `/seitenverzeichnis/`,
-        `/en/sitemap/`,
-        `/404/`,
-        `/en/404/`,
-        `/404.html`,
-      ],
-      createLinkInHead: true, // optional: create a link in the `<head>` of your site
-      addUncaughtPages: true, // optional: will fill up pages that are not caught by queries and mapping and list them under `sitemap-pages.xml`
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
