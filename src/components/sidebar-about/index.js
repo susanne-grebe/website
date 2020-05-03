@@ -52,6 +52,9 @@ const SocialProfileItem = styled.li`
   align-items: center;
   a {
     font-size: 2rem;
+    svg {
+      fill: #aa5d00;
+    }
   }
   &:nth-of-type(1) {
     margin-left: 0;
