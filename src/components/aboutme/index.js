@@ -19,10 +19,10 @@ const Aboutme = ({ aboutmeData, lang }) => {
 
   const Section = styled.section`
     position: relative;
-    padding-top: calc(${theme.paddings.top}rem * 2);
-    padding-bottom: calc(${theme.paddings.bottom}rem * 4);
-    padding-left: ${theme.paddings.left}rem;
-    padding-right: ${theme.paddings.right}rem;
+    padding-top: 4rem;
+    padding-bottom: 8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   `
 
   const Skew = styled.div`
