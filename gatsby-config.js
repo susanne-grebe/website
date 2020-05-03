@@ -97,7 +97,7 @@ module.exports = {
     },
     `gatsby-plugin-transition-link`,
     {
-      resolve: `gatsby-plugin-advance-sitemap`,
+      resolve: `gatsby-plugin-advanced-sitemap`,
       options: {
         query: `
           {
