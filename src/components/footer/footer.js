@@ -25,7 +25,8 @@ const Footer = ({ data, logo, lang }) => {
   const FooterInner = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     width: 100%;
     max-width: 540px;
@@ -88,10 +89,11 @@ const Footer = ({ data, logo, lang }) => {
     text-transform: uppercase;
     transition: all 0.3s ease-in-out;
     display: inline-block;
-    width: 250px;
+    width: 100%;
     height: 40px;
     background-color: transparent;
     text-align: center;
+    margin: 2rem 0;
     &:hover,
     &:focus {
       background-color: #aa5d00;
@@ -125,6 +127,7 @@ const Footer = ({ data, logo, lang }) => {
     width: 100%;
     display: flex;
     flex-direction: row;
+    margin-bottom: 2rem;
     @media (min-width: 768px) {
       width: 50%;
     }
@@ -139,11 +142,15 @@ const Footer = ({ data, logo, lang }) => {
     border-left: 1px solid #aa5d00;
   `
 
-  const Copyright = styled.p``
+  const Copyright = styled.p`
+    text-align: center;
+  `
 
   const FooterNav = styled.nav`
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
     @media (min-width: 768px) {
       flex-direction: row;
     }
