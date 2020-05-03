@@ -19,6 +19,10 @@ const Hero = ({ heroData }) => {
     height: 90vh;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
   `
 
   const Overlay = styled.div`
