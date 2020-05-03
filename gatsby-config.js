@@ -104,7 +104,7 @@ module.exports = {
         categories: [
           {
             categoryName: "analytics", // Unique id of the category which is set by Cookiehub.
-            cookieName: "susanne-grebe-google-analytics-gdpr_cookies-enabled", // Your custom cookie name
+            cookieName: "susanne-grebe-gdpr-google-analytics", // Your custom cookie name
           },
         ],
       },
@@ -150,18 +150,10 @@ module.exports = {
         head: true,
         // Setting this parameter is optional
         anonymize: true,
-        // Setting this parameter is also optional
-        respectDNT: true,
-        // Delays sending pageview hits on route update (in milliseconds)
-        pageTransitionDelay: 0,
         // Enables Google Optimize using your container Id
         optimizeId: process.env.GOOGLE_WEBSTREAM,
         // Defers execution of google analytics script after page load
-        defer: true,
-        // Any additional optional fields
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: "https://susanne-grebe.de",
+        defer: false,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
