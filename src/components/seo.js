@@ -63,7 +63,7 @@ function SEO({ description, lang, meta, title, data }) {
         },
         {
           property: `og:image:width`,
-          content: `400`,
+          content: `520`,
         },
         {
           property: `og:image:alt`,
