@@ -70,6 +70,7 @@ const Mediation = ({ mediationData, lang }) => {
     margin-left: auto;
     margin-right: auto;
     max-width: ${theme.widths["container-width"]};
+    overflow: hidden;
     @media (min-width: 768px) {
       display: grid;
       grid-template: "c i";
