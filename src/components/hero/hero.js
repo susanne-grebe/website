@@ -52,8 +52,15 @@ const Hero = ({ heroData }) => {
   `
 
   const HeroTitle = styled.h1`
-    font-size: 2.7rem;
+    font-size: 1.4rem;
     z-index: 100;
+    text-transform: capitalize;
+    @media (min-width: 360px) {
+      font-size: 1.6rem;
+    }
+    @media (min-width: 375px) {
+      font-size: 1.9rem;
+    }
     @media (min-width: 768px) {
       font-size: 3.5rem;
       line-height: 1.1;
@@ -92,7 +99,7 @@ const Hero = ({ heroData }) => {
   `
 
   const HeroSlogan = styled.p`
-    font-size: 1.125rem;
+    font-size: 1rem;
     z-index: 100;
   `
 
@@ -105,19 +112,19 @@ const Hero = ({ heroData }) => {
             {homePageHeroSubtitle ? (
               <HeroSubTitle>{homePageHeroSubtitle}</HeroSubTitle>
             ) : (
-              ""
-            )}
+                ""
+              )}
             <br />
             {homePageHeroTitle}
           </HeroTitle>
         ) : (
-          ""
-        )}
+            ""
+          )}
         {homePageHeroSlogan ? (
           <HeroSlogan>{homePageHeroSlogan}</HeroSlogan>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </HeroInner>
     </Hero>
   )
