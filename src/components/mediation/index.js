@@ -114,7 +114,7 @@ const Mediation = ({ mediationData, lang }) => {
   `
 
   const MediationContent = styled.div`
-    width: 90%;
+    width: 100%;
     h3 {
       font-size: calc(${theme.fontSizes["body-small"]}rem * 1.5);
       margin-top: 2rem;
@@ -129,6 +129,7 @@ const Mediation = ({ mediationData, lang }) => {
     @media (min-width: 768px) {
       padding-right: calc(${theme.paddings.left}rem * 3);
       grid-area: c;
+      width: 90%;
       h3 {
         margin-top: 2rem;
         font-size: calc(${theme.fontSizes["body-small"]}rem * 1.8);
@@ -145,13 +146,14 @@ const Mediation = ({ mediationData, lang }) => {
     margin-right: auto;
     text-align: left;
     max-width: ${theme.widths["container-width"]};
-    margin-top: 2rem;
+    margin-top: 0;
     z-index: 2;
     position: relative;
     @media (min-width: 768px) {
       max-width: ${theme.widths["container-width-md"]};
       text-align: center;
       justify-content: center;
+      margin-top: 3rem;
     }
     @media (min-width: 1025px) {
       flex-direction: row;
@@ -169,6 +171,8 @@ const Mediation = ({ mediationData, lang }) => {
     transition: all 0.3s ease-in-out;
     display: inline-block;
     text-align: center;
+    width: 100%;
+    max-width: 375px;
     &:hover,
     &:focus {
       background-color: #aa5d00;

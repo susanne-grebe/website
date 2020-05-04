@@ -168,13 +168,15 @@ const Coaching = ({ coachingData, lang }) => {
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2rem;
+    margin-top: 0;
     text-align: left;
     max-width: ${theme.widths["container-width"]};
+    justify-content: center;
     @media (min-width: 768px) {
       max-width: ${theme.widths["container-width-md"]};
       text-align: center;
       justify-content: center;
+      margin-top: 3rem;
     }
     @media (min-width: 1025px) {
       flex-direction: row;
@@ -192,6 +194,8 @@ const Coaching = ({ coachingData, lang }) => {
     transition: all 0.3s ease-in-out;
     display: inline-block;
     text-align: center;
+    width: 100%;
+    max-width: 375px;
     &:hover,
     &:focus {
       background-color: #aa5d00;
