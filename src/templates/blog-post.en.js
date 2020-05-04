@@ -102,9 +102,11 @@ const BlogListPage = ({ data, pageContext }) => {
     ],
   }
 
+  const path = `https://www.susanne-grebe.de/en/blog/${data.postsEN.edges[0].node.fields.slug}`
+
   return (
     <Layout>
-      <SEO title="Susanne Grebe" data={seoData} lang="en" />
+      <SEO title="Susanne Grebe" data={seoData} lang="en" path={path} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={heroData} />
       <Wrapper>

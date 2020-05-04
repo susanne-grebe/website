@@ -22,9 +22,10 @@ import LatetstPosts from "../components/latetst-posts"
 import Footer from "../components/footer/footer"
 
 const IndexPage = ({ data, location }) => {
+  const path = `https://www.susanne-grebe.de/en`
   return (
     <Layout>
-      <SEO title="Home" data={data.seoEN} lang="en" />
+      <SEO title="Home" data={data.seoEN} lang="en" path={path} />
       <JsonLd data={data.localBusinessEN.nodes[0]} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={data.heroEN} />

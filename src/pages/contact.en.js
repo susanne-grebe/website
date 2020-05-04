@@ -231,9 +231,11 @@ const IndexPage = ({ data, location }) => {
     setChecked(!checked)
   }
 
+  const path = `https://www.susanne-grebe.de/contact`
+
   return (
     <Layout>
-      <SEO title="Contact" data={data.seoEN} lang="en" />
+      <SEO title="Contact" data={data.seoEN} lang="en" path={path} />
       <JsonLd data={data.localBusinessEN.nodes[0]} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} />
       <Hero heroData={heroData} />

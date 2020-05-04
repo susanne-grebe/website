@@ -193,9 +193,11 @@ export default ({ data }) => {
     ],
   }
 
+  const path = `https://www.susanne-grebe.de/en/${data.contentfulPage.pageSlug}`
+
   return (
     <Layout>
-      <SEO title="Susanne Grebe" data={seoEN} lang="en" />
+      <SEO title="Susanne Grebe" data={seoEN} lang="en" path={path} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={heroData} />
       {data.allContentfulPageSection.edges.map(({ node }, index) => {
@@ -215,25 +217,25 @@ export default ({ data }) => {
             </SectionInner>
           </Section>
         ) : (
-          <Section key={index} data-layout={node.pageImageRight}>
-            {node.pageSectionSkewBackground ? <Skew /> : ""}
-            <SectionHeader
-              title={node.pageSectionHeading}
-              subTitle={node.pageSectionSubHeading}
-            />
-            <SectionInner data-layout={node.pageImageRight}>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: node.pageSectionContent.childMarkdownRemark.html,
-                }}
-              ></div>
-              <Image
-                fluid={node.pageSectionImage.fluid}
-                alt={node.pageSectionImage.description}
+            <Section key={index} data-layout={node.pageImageRight}>
+              {node.pageSectionSkewBackground ? <Skew /> : ""}
+              <SectionHeader
+                title={node.pageSectionHeading}
+                subTitle={node.pageSectionSubHeading}
               />
-            </SectionInner>
-          </Section>
-        )
+              <SectionInner data-layout={node.pageImageRight}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: node.pageSectionContent.childMarkdownRemark.html,
+                  }}
+                ></div>
+                <Image
+                  fluid={node.pageSectionImage.fluid}
+                  alt={node.pageSectionImage.description}
+                />
+              </SectionInner>
+            </Section>
+          )
       })}
       {data.allContentfulPageCta.edges.length > 0 ? (
         <Section
@@ -253,8 +255,8 @@ export default ({ data }) => {
           </CTALink>
         </Section>
       ) : (
-        ""
-      )}
+          ""
+        )}
       <Footer
         data={data.footerEN.nodes}
         logo={data.localBusinessEN.nodes[0].seoCompanyLogo}

@@ -21,10 +21,13 @@ import Reviews from "../components/reviews"
 import LatetstPosts from "../components/latetst-posts"
 import Footer from "../components/footer/footer"
 
+
+
 const IndexPage = ({ data, location }) => {
+  const path = `https://www.susanne-grebe.de`
   return (
     <Layout>
-      <SEO title="Startseite" data={data.seoDE} lang="de" />
+      <SEO title="Startseite" data={data.seoDE} lang="de" path={path} />
       <JsonLd data={data.localBusinessDE.nodes[0]} />
       <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
       <Hero heroData={data.heroDE} />

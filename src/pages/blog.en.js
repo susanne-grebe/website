@@ -59,9 +59,11 @@ const BlogPage = ({ data, pageContext }) => {
     ],
   }
 
+  const path = `https://www.susanne-grebe.de/en/blog`
+
   return (
     <Layout>
-      <SEO title="blog" data={data.seoEN} lang="en" />
+      <SEO title="blog" data={data.seoEN} lang="en" path={path} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
       <Hero heroData={heroData} />
       <Wrapper>
