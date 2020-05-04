@@ -47,7 +47,11 @@ const Navbar = ({ logo, lang }) => {
   navRef.current = headerBG
   useEffect(() => {
     const handleScroll = () => {
-      const show = window.scrollY > 370
+      const isSmallDevice = window.innerHeight < 737;
+
+      const scrollYoffSet = isSmallDevice ? 10 : 400;
+
+      const show = window.scrollY > scrollYoffSet
       if (navRef.current !== show) {
         setHeaderBG(show)
       }
