@@ -231,7 +231,7 @@ const IndexPage = ({ data, location }) => {
     setChecked(!checked)
   }
 
-  const path = `https://www.susanne-grebe.de/contact`
+  const path = `https://www.susanne-grebe.de/en/contact`
 
   return (
     <Layout>
@@ -297,11 +297,13 @@ const IndexPage = ({ data, location }) => {
               </SocialProfiles>
             </SectionContactInfo>
             <Form
-              name="contact"
+              name="contact_en"
               method="POST"
               netlify-honeypot="bot-field"
               data-netlify="true"
+              action='/success'
             >
+              <input type="hidden" name="form-name" value="contact_en" />
               <FormGroup data-visible="false">
                 <FormLabel htmlFor="botfield">
                   <h3>Do not fill this out if you are a human being</h3>
@@ -396,7 +398,7 @@ const IndexPage = ({ data, location }) => {
                     type="checkbox"
                     style={{ marginRight: "1rem" }}
                   />
-                  I have read the <a href="/en/cookie-policy">cookie policy</a>{" "}
+                  I have read the <a href="/en/data-protection">cookie policy</a>{" "}
                   and agree to it...{" "}
                 </p>
               </FormGroup>

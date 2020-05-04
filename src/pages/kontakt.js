@@ -300,7 +300,7 @@ const IndexPage = ({ data, location }) => {
               method="POST"
               netlify-honeypot="bot-field"
               data-netlify="true"
-              action="/pages/erfolgreich"
+              action="/erfolgreich"
             >
               <input type="hidden" name="form-name" value="contact" />
               <FormGroup data-visible="false">
@@ -398,7 +398,7 @@ const IndexPage = ({ data, location }) => {
                     style={{ marginRight: "1rem" }}
                   />
                   Ich habe die{" "}
-                  <a href="/cookie-richtlinie">Cookie-Richtlinie</a> gelesen und
+                  <a href="/datenschutz">Cookie-Richtlinie</a> gelesen und
                   bin damit einverstanden...{" "}
                 </p>
               </FormGroup>
