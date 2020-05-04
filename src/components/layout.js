@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: #fff
+    color: #aa5d00;
     font-size: ${theme.fontSizes.body};
     font-weight: ${theme.fontWeights["body-bold"]};
     transition: all 300ms ease-in-out;
