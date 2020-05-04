@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react"
-import { ThemeContext } from "styled-components"
+import React, { useState } from "react"
 import styled from "@emotion/styled"
 
 import Img from "gatsby-image"
@@ -7,31 +6,16 @@ import Img from "gatsby-image"
 import BGImg from "../../images/3577.jpg"
 import SectionHeader from "../section-header"
 
-const Reviews = ({ reviewData, reviewHeadingData }) => {
-  const { homePageCustomerReviewHeading } = reviewHeadingData.nodes[0]
-
-  const reviews = reviewData.edges
-
-  const [current, setCurrent] = useState(reviews[0])
-  const [active, setActive] = useState(0)
-
-  const handleSetClick = event => {
-    setCurrent(reviews[event.target.getAttribute("data-review")])
-    setActive(event.target.getAttribute("data-review"))
-  }
-
-  const theme = useContext(ThemeContext)
-
-  const Section = styled.section`
-    padding-top: calc(${theme.paddings.top}rem * 2);
-    padding-bottom: calc(${theme.paddings.bottom}rem * 2);
+const Section = styled.section`
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     width: 100%;
-    padding-left: ${theme.paddings.left}rem;
-    padding-right: ${theme.paddings.right}rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
   `
 
-  const ReviewInner = styled.div`
+const ReviewInner = styled.div`
     z-index: 2;
     position: relative;
     display: flex;
@@ -40,51 +24,51 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
     flex-direction: column;
     text-align: left;
     transition: all 300ms ease-in-out;
-    max-width: ${theme.widths["container-width"]};
-    margin: ${theme.margins.center};
-    @media (min-width: 768px) {
-      justify-content: center;
+    max-width: 540px;
+    justify-content: center;
       align-items: center;
       text-align: center;
-      max-width: ${theme.widths["container-width-md"]};
+    margin: 3rem auto;
+    @media (min-width: 768px) {
+      max-width: 992px;
     }
   `
 
-  const ReviewClientImg = styled(Img)`
+const ReviewClientImg = styled(Img)`
     width: 125px !important;
     height: 125px !important;
     z-index: 2;
     border-radius: 50%;
-    margin-bottom: ${theme.margins.bottom}rem;
+    margin-bottom: 2rem;
   `
 
-  const ReviewService = styled.h3`
-    margin-bottom: ${theme.margins.bottom}rem;
+const ReviewService = styled.h3`
+    margin-bottom: 2rem;
   `
 
-  const ReviewReview = styled.p`
-    font-size: ${theme.fontSizes.body}rem;
+const ReviewReview = styled.p`
+    font-size: 1.125rem;
   `
 
-  const ReviewClientName = styled.p`
+const ReviewClientName = styled.p`
     color: #aa5d00;
-    font-weight: ${theme.fontWeights["body-bold"]};
+    font-weight: 500;
   `
 
-  const ReviewJobTitle = styled.p`
-    font-size: ${theme.fontSizes["body-small"]}rem;
+const ReviewJobTitle = styled.p`
+    font-size: 1rem;
   `
 
-  const Navigation = styled.div`
+const Navigation = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: ${theme.margins.top}rem;
+    margin-top: 2rem;
     z-index: 2;
     position: relative;
   `
 
-  const NavigationButton = styled.span`
+const NavigationButton = styled.span`
     width: 20px;
     height: 20px;
     display: flex;
@@ -98,27 +82,40 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
       content: "";
       width: 6px;
       height: 6px;
-      background-color: ${theme.colors.black};
+      background-color: #404040;
       z-index: 3;
       position: relative;
       transition: background 300ms ease-in-out;
     }
     &:hover::after {
-      background-color: ${theme.colors.primary};
+      background-color: #aa5d00;
     }
-    &[data-review="${active}"]::after {
-      background-color: ${theme.colors.primary};
+    &[data-review="true"]::after {
+      background-color: #aa5d00;
     }
   `
 
-  const Overlay = styled.div`
+const Overlay = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
     left: 0;
     top: 0;
-    background-color: ${theme.colors.overlay};
+    background-color:rgba(253, 251, 246, 0.8);
   `
+
+const Reviews = ({ reviewData, reviewHeadingData }) => {
+  const { homePageCustomerReviewHeading } = reviewHeadingData.nodes[0]
+
+  const reviews = reviewData.edges
+
+  const [current, setCurrent] = useState(reviews[0])
+  const [active, setActive] = useState(0)
+
+  const handleSetClick = event => {
+    setCurrent(reviews[event.target.getAttribute("data-review")])
+    setActive(event.target.getAttribute("data-review"))
+  }
 
   return (
     <Section
