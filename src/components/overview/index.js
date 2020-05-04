@@ -70,9 +70,10 @@ const Overview = ({ overviewData }) => {
 
   const Img = styled.img`
     max-width: 125px;
+    max-height: 125px;
     width: 100%;
+    height: auto;
     margin-bottom: calc(${theme.margins.bottom}rem / 1);
-    padding: 1rem;
     @media (min-width: 768px) {
       grid-area: i;
       margin-right: calc(${theme.margins.right}rem * 5);
