@@ -411,7 +411,7 @@ const IndexPage = ({ data, location }) => {
           </SectionInner>
         </Section>
         <Section
-          style={{ paddingLeft: "0", paddingRight: "0", paddingBottom: "0" }}
+          style={{ paddingLeft: "0", paddingRight: "0", paddingBottom: "0", paddingTop: '0' }}
         >
           <GoogleMap
             companyName={data.localBusinessEN.nodes[0].seoCompanyName}
