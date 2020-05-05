@@ -38,6 +38,15 @@ export default ({ data, pageContext }) => {
     max-width: 540px;
     position: relative;
     z-index: 2;
+    div {
+      p a .gatsby-resp-image-wrapper {
+        margin-left: 0 !important;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        max-width: 250px;
+        width: 100%;
+      }
+    }
     &[data-layout="true"] {
       flex-direction: column;
       &${Section} {

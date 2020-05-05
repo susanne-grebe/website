@@ -1,13 +1,2 @@
 // bootstrap 4 to support in development
 @import "~bootstrap/scss/bootstrap";
-
-.cookieConsent {
-  a {
-    color: #ffffff;
-    transition: all 0.3s ease-in-out;
-    &:hover,
-    &:focus {
-      color: #fdfbf6;
-    }
-  }
-}
