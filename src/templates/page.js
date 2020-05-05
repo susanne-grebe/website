@@ -43,7 +43,7 @@ export default ({ data, pageContext }) => {
         margin-left: 0 !important;
         margin-top: 2rem;
         margin-bottom: 2rem;
-        max-width: 250px;
+        max-width: 250px !important;
         width: 100%;
       }
     }
