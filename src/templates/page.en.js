@@ -59,6 +59,15 @@ export default ({ data }) => {
         margin-bottom: 1rem;
       }
     }
+    div {
+      p a .gatsby-resp-image-wrapper {
+        margin-left: 0 !important;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        max-width: 250px !important;
+        width: 100%;
+      }
+    }
     @media (min-width: 768px) {
       flex-direction: row-reverse;
       max-width: 720px;
