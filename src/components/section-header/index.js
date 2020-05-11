@@ -31,7 +31,6 @@ const SectionHeader = ({ title, subTitle }) => {
     position: relative;
     line-height: 1.4;
     padding-bottom: calc(${theme.paddings.bottom}rem / 2);
-    text-transform: capitalize !important;
     &:after {
       content: "";
       position: absolute;
