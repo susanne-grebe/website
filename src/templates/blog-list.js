@@ -144,9 +144,6 @@ export const BlogListQuery = graphql`
     }
     blogDE: allContentfulBlogPage(filter: { node_locale: { eq: "de" } }) {
       nodes {
-        blogPageShowAboutSidebar
-        blogPageShowCategoriesSidebar
-        blogPageShowLatestPostSidebar
         blogPageSlogan
         blogPageSubtitle
         blogPageTitle

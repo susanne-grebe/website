@@ -132,9 +132,6 @@ export const BlogQuery = graphql`
     }
     blogEN: allContentfulBlogPage(filter: { node_locale: { eq: "en" } }) {
       nodes {
-        blogPageShowAboutSidebar
-        blogPageShowCategoriesSidebar
-        blogPageShowLatestPostSidebar
         blogPageSlogan
         blogPageSubtitle
         blogPageTitle
@@ -159,7 +156,7 @@ export const BlogQuery = graphql`
     postsEN: allContentfulBlogPost(
       filter: { node_locale: { eq: "en" } }
       sort: { fields: [createdAt], order: DESC }
-      limit: 2
+      limit: 5
     ) {
       edges {
         node {

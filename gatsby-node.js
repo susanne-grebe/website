@@ -108,7 +108,7 @@ exports.createPages = async ({ graphql, actions }) => {
   /**
    * Post per page
    */
-  const postsPerPage = 2
+  const postsPerPage = 5
 
   /**
    * Create the amount of pages bases on posts per page and amount of posts in result
