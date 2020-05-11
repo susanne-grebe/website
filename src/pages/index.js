@@ -146,7 +146,7 @@ export const LayoutQuery = graphql`
             quality: 80,
             cropFocus: CENTER,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -157,7 +157,7 @@ export const LayoutQuery = graphql`
         homePageCoachingSecondColContent
         homePageCoachingSecondColImage {
           fixed(width: 600, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -169,7 +169,7 @@ export const LayoutQuery = graphql`
             quality: 80,
             cropFocus: CENTER,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -200,31 +200,21 @@ export const LayoutQuery = graphql`
     }
     workshopsDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
       nodes {
+        homePageWorkshopsHeading
+        homePageWorkshopsSubHeading
+        homePageWorkshopsFirstColTitle
         homePageWorkshopsFirstColContent
+        homePageWorkshopsSecondColTitle
+        homePageWorkshopsSecondColContent
+        homePageWorkshopsThirdColTitle
+        homePageWorkshopsThirdColContent
         homePageWorkshopsFirstColImage {
           fixed(
             width: 600,
             quality: 80,
             cropFocus: CENTER,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-        homePageWorkshopsFirstColTitle
-        homePageWorkshopsHeading
-        homePageWorkshopsSecondColContent
-        homePageWorkshopsSecondColTitle
-        homePageWorkshopsSubHeading
-        homePageWorkshopsThirdColContent
-        homePageWorkshopsThirdColTitle
-        homePageWorkshopsThirdColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -234,7 +224,17 @@ export const LayoutQuery = graphql`
             quality: 80,
             cropFocus: CENTER,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
+          }
+          description
+        }
+        homePageWorkshopsThirdColImage {
+          fixed(
+            width: 600,
+            quality: 80,
+            cropFocus: CENTER,
+          ) {
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -250,7 +250,7 @@ export const LayoutQuery = graphql`
             cropFocus: CENTER,
             quality: 80,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
@@ -291,7 +291,7 @@ export const LayoutQuery = graphql`
               quality: 80,
               height: 100,
             ) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
+              ...GatsbyContentfulFixed_withWebp
             }
             description
           }
@@ -348,7 +348,7 @@ export const LayoutQuery = graphql`
             height: 60,
             cropFocus: CENTER,
           ) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
+            ...GatsbyContentfulFixed_withWebp
           }
           description
         }
