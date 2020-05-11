@@ -170,13 +170,6 @@ export const BlogListQuery = graphql`
         }
       }
     }
-    blogDE: allContentfulBlogPage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        blogPageShowAboutSidebar
-        blogPageShowCategoriesSidebar
-        blogPageShowLatestPostSidebar
-      }
-    }
     postsDE: allContentfulBlogPost(
       filter: { blogPostSlug: { eq: $slug }, node_locale: { eq: "de" } }
     ) {
