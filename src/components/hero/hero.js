@@ -59,7 +59,6 @@ const Hero = ({ heroData, height }) => {
   const HeroTitle = styled.h1`
     font-size: 1.4rem;
     z-index: 100;
-    text-transform: capitalize;
     @media (min-width: 360px) {
       font-size: 1.6rem;
     }
