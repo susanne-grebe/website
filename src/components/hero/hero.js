@@ -103,7 +103,7 @@ const Hero = ({ heroData, height }) => {
   `
 
   const HeroSlogan = styled.p`
-    font-size: 1rem;
+    font-size: 1.125rem;
     z-index: 100;
   `
 
