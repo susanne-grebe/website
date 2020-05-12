@@ -21,7 +21,6 @@ import { JsonLd } from "../components/jsonld"
 
 import Navbar from "../components/navbar"
 import Hero from "../components/hero/hero"
-import SectionHeader from "../components/section-header/index"
 import GoogleMap from "../components/map/index"
 import Footer from "../components/footer/footer"
 
@@ -241,8 +240,6 @@ const IndexPage = ({ data, location }) => {
       <Hero heroData={heroData} height='small' />
       <main className="main">
         <Section>
-          <SectionHeader title="Contact Me." />
-
           <SectionInner>
             <SectionContactInfo>
               <h2>{data.authorEN.edges[0].node.authorName}</h2>
