@@ -12,6 +12,7 @@ import SEO from "../components/seo"
 
 import Navbar from "../components/navbar"
 import Hero from "../components/hero/hero"
+import Share from '../components/share'
 import PrevNext from "../components/prev-next-post/"
 import SidebarAbout from "../components/sidebar-about"
 import SidebarLatestPosts from "../components/sidebar-latest-posts"
@@ -104,6 +105,11 @@ const BlogListPage = ({ data, pageContext }) => {
 
   const path = `https://www.susanne-grebe.de/en/blog/${data.postsEN.edges[0].node.fields.slug}`
 
+  const ShareData = {
+    url: path,
+    title: data.postsEN.edges[0].node.blogPostTitle
+  }
+
   return (
     <Layout>
       <SEO title="Susanne Grebe" data={seoData} lang="en" path={path} />
@@ -122,6 +128,7 @@ const BlogListPage = ({ data, pageContext }) => {
               </Section>
             )
           })}
+          <Share data={ShareData} lang="en" />
           <PrevNext prev={pageContext.prev} next={pageContext.next} lang="en" />
         </main>
         <aside>
