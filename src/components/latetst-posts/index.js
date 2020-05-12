@@ -165,7 +165,7 @@ export default ({ data, lang }) => {
 
   return (
     <Section>
-      <SectionHeader title="latetst Posts" />
+      <SectionHeader title="Latetst Posts" />
       <SectionInner>
         {data.edges.map(({ node }, index) => {
           const path =
