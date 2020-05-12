@@ -76,12 +76,13 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
     centerMode: true,
     infinite: true,
     centerPadding: "0px",
-    speed: 500,
     dots: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoPlay: true,
-    autoPlaySpeed: 3000
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 10000,
+    cssEase: "ease-in-out"
   }
 
   return (
