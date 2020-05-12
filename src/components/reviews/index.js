@@ -6,6 +6,11 @@ import Img from "gatsby-image"
 import BGImg from "../../images/3577.jpg"
 import SectionHeader from "../section-header"
 
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const Section = styled.section`
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -24,14 +29,9 @@ const ReviewInner = styled.div`
     flex-direction: column;
     text-align: left;
     transition: all 300ms ease-in-out;
-    max-width: 540px;
     justify-content: center;
       align-items: center;
       text-align: center;
-    margin: 3rem auto;
-    @media (min-width: 768px) {
-      max-width: 992px;
-    }
   `
 
 const ReviewClientImg = styled(Img)`
@@ -59,42 +59,6 @@ const ReviewJobTitle = styled.p`
     font-size: 1rem;
   `
 
-const Navigation = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 2rem;
-    z-index: 2;
-    position: relative;
-  `
-
-const NavigationButton = styled.span`
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-    margin: 0 3px;
-    position: relative;
-    cursor: pointer;
-    &::after {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background-color: #404040;
-      z-index: 3;
-      position: relative;
-      transition: background 300ms ease-in-out;
-    }
-    &:hover::after {
-      background-color: #aa5d00;
-    }
-    &[data-review="true"]::after {
-      background-color: #aa5d00;
-    }
-  `
-
 const Overlay = styled.div`
     width: 100%;
     height: 100%;
@@ -107,14 +71,17 @@ const Overlay = styled.div`
 const Reviews = ({ reviewData, reviewHeadingData }) => {
   const { homePageCustomerReviewHeading } = reviewHeadingData.nodes[0]
 
-  const reviews = reviewData.edges
-
-  const [current, setCurrent] = useState(reviews[0])
-  const [active, setActive] = useState(0)
-
-  const handleSetClick = event => {
-    setCurrent(reviews[event.target.getAttribute("data-review")])
-    setActive(event.target.getAttribute("data-review"))
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "0px",
+    speed: 500,
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoPlay: true,
+    autoPlaySpeed: 3000
   }
 
   return (
@@ -128,30 +95,27 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
     >
       <Overlay />
       <SectionHeader title={homePageCustomerReviewHeading} />
-      <ReviewInner current={active}>
-        <ReviewClientImg
-          fixed={current.node.customerReviewsAvatar.fixed}
-          alt={current.node.customerReviewsAvatar.description}
-          loading="lazy"
-        />
-        <ReviewService>
-          {current.node.customerReviewsServiceDelivered}
-        </ReviewService>
-        <ReviewReview>{current.node.customerReviewsReview}</ReviewReview>
-        <ReviewClientName>{current.node.customerReviewsName}</ReviewClientName>
-        <ReviewJobTitle>{current.node.customersReviewsJobTitle}</ReviewJobTitle>
-      </ReviewInner>
-      <Navigation>
-        {reviewData.edges.map((node, index) => {
+      <Slider {...settings}>
+        {reviewData.edges.map((data, index) => {
+          console.log(data)
           return (
-            <NavigationButton
-              key={index}
-              data-review={index}
-              onClick={event => handleSetClick(event)}
-            ></NavigationButton>
+            <ReviewInner key={index}>
+              <ReviewClientImg
+                fixed={data.node.customerReviewsAvatar.fixed}
+                alt={data.node.customerReviewsAvatar.description}
+                loading="lazy"
+              />
+              <ReviewService>
+                {data.node.customerReviewsServiceDelivered}
+              </ReviewService>
+              <ReviewReview>{data.node.customerReviewsReview}</ReviewReview>
+              <ReviewClientName>{data.node.customerReviewsName}</ReviewClientName>
+              <ReviewJobTitle>{data.node.customersReviewsJobTitle}</ReviewJobTitle>
+            </ReviewInner>
           )
         })}
-      </Navigation>
+
+      </Slider>
     </Section>
   )
 }

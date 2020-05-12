@@ -1,2 +1,26 @@
 // bootstrap 4 to support in development
 @import "~bootstrap/scss/bootstrap";
+
+.center {
+	margin: 0 auto;
+	max-width: 768px;
+	padding: 0 1rem;
+	width: 100%;
+}
+
+.slick-arrow {
+	&:before {
+		content: '\2192';
+		color: #404040 !important;
+	}
+}
+
+.slick-dots li.slick-active button:before {
+	color: #aa5d00 !important;
+}
+
+.slick-dots {
+	max-width: 768px !important;
+	margin: 0 auto !important;
+	left: 0;
+}
