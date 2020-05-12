@@ -340,7 +340,6 @@ export const LayoutQuery = graphql`
         footerBottomBarCopyrightContent
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
-        footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
           fixed(

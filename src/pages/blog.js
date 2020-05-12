@@ -232,7 +232,6 @@ export const BlogQuery = graphql`
         footerBottomBarCopyrightContent
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
-        footerMiddleBarBottomButtonText
         footerMiddleBarTopButtonText
         footerMiddleBarLogo {
           fixed(width: 600, cropFocus: CENTER, quality: 80) {
