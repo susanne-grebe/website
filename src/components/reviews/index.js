@@ -97,7 +97,6 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
       <SectionHeader title={homePageCustomerReviewHeading} />
       <Slider {...settings}>
         {reviewData.edges.map((data, index) => {
-          console.log(data)
           return (
             <ReviewInner key={index}>
               <ReviewClientImg
