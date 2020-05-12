@@ -238,7 +238,7 @@ const IndexPage = ({ data, location }) => {
       <SEO title="Contact" data={data.seoEN} lang="en" path={path} />
       <JsonLd data={data.localBusinessEN.nodes[0]} />
       <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} />
-      <Hero heroData={heroData} />
+      <Hero heroData={heroData} height='small' />
       <main className="main">
         <Section>
           <SectionHeader title="Contact Me." />

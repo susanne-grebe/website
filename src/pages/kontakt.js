@@ -239,7 +239,7 @@ const IndexPage = ({ data, location }) => {
       <SEO title="Kontakt" data={data.seoDE} lang="de" path={path} />
       <JsonLd data={data.localBusinessDE.nodes[0]} />
       <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={heroData} />
+      <Hero heroData={heroData} height='small' />
       <main className="main">
         <Section>
           <SectionHeader title="Kontakt aufnehmen." />

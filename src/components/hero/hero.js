@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 
 import BackgroundImage from "gatsby-background-image"
 
-const Hero = ({ heroData }) => {
+const Hero = ({ heroData, height }) => {
   const {
     homePageHeroTitle,
     homePageHeroSubtitle,
@@ -14,15 +14,20 @@ const Hero = ({ heroData }) => {
 
   const theme = useContext(ThemeContext)
 
+  console.log(height)
+  const heroHeight = height === 'small' ? '50vh !important' : '90vh'
+  const backgroundPosition = height === 'small' ? 'bottom !important' : 'center'
+
   const Hero = styled(BackgroundImage)`
     width: 100%;
-    height: 90vh;
+    height: ${heroHeight};
     clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
     background-attachment: fixed;
     background-repeat: no-repeat;
     -o-background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
+    background-position: ${backgroundPosition};
   `
 
   const Overlay = styled.div`
