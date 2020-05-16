@@ -74,39 +74,39 @@ export function JsonLd({ data }) {
           },
           openingHours: [
             `Montag ${
-              seoCompanyOpenTimeMonday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeMonday
+            seoCompanyOpenTimeMonday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeMonday
             }`,
             `Dienstag: ${
-              seoCompanyOpenTimeTuesday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeTuesday
+            seoCompanyOpenTimeTuesday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeTuesday
             }`,
             `Mittwoch: ${
-              seoCompanyOpenTimeWednesday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeWednesday
+            seoCompanyOpenTimeWednesday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeWednesday
             }`,
             `Donnerstag: ${
-              seoCompanyOpenTimeThursday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeThursday
+            seoCompanyOpenTimeThursday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeThursday
             }`,
             `Freitag: ${
-              seoCompanyOpenTimeFriday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeFriday
+            seoCompanyOpenTimeFriday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeFriday
             }`,
             `Samstag: ${
-              seoCompanyOpenTimeSaturday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeSaturday
+            seoCompanyOpenTimeSaturday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeSaturday
             }`,
             `Sonntag: ${
-              seoCompanyOpenTimeSunday === "0"
-                ? "Geschlossen"
-                : seoCompanyOpenTimeSunday
+            seoCompanyOpenTimeSunday === "0"
+              ? "Geschlossen"
+              : seoCompanyOpenTimeSunday
             }`,
           ],
           hasOfferCatalog: {
@@ -119,7 +119,7 @@ export function JsonLd({ data }) {
                 Description: seoCompanyService1Description
                   ? seoCompanyService1Description
                   : "",
-                url: "https://www.susanne-grebe.de/coaching",
+                url: "https://www.susanne-grebe.de/coaching-im-raum-aachen",
               },
               {
                 "@type": "ListItem",
@@ -127,7 +127,7 @@ export function JsonLd({ data }) {
                 Description: seoCompanyService2Description
                   ? seoCompanyService2Description
                   : "",
-                url: "https://www.susanne-grebe.de/mediation",
+                url: "https://www.susanne-grebe.de/mediation-im-raum-aachen",
               },
               {
                 "@type": "ListItem",
@@ -135,7 +135,7 @@ export function JsonLd({ data }) {
                 Description: seoCompanyService3Description
                   ? seoCompanyService3Description
                   : "",
-                url: "https://www.susanne-grebe.de/workshops",
+                url: "https://www.susanne-grebe.de/seminare-im-raum-aachen",
               },
             ],
           },
