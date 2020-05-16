@@ -3,6 +3,7 @@
  */
 
 import React, { useState } from "react"
+import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import styled from "@emotion/styled"
 import Img from "gatsby-image"
@@ -237,6 +238,17 @@ const IndexPage = ({ data, location }) => {
     <Layout>
       <SEO title="Kontakt" data={data.seoDE} lang="de" path={path} />
       <JsonLd data={data.localBusinessDE.nodes[0]} />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "http://schema.org",
+            "@type": "ContactPage",
+            "name": `${data.seoDE.nodes[0].SeoTitle} | ${data.heroDE.nodes[0].homePageHeroTitle}`,
+            "description": `${data.seoDE.nodes[0].SeoDescription}`,
+            "breadcrumb": "Startseite > Kontakt"
+          })}
+        </script>
+      </Helmet>
       <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
       <Hero heroData={heroData} height='small' />
       <main className="main">
