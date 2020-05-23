@@ -194,8 +194,7 @@ const Coaching = ({ coachingData, lang }) => {
     transition: all 0.3s ease-in-out;
     display: inline-block;
     text-align: center;
-    width: 100%;
-    max-width: 375px;
+    max-width: 500px;
     &:hover,
     &:focus {
       background-color: #aa5d00;
