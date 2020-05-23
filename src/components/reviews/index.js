@@ -82,7 +82,8 @@ const Reviews = ({ reviewData, reviewHeadingData }) => {
     autoplay: true,
     speed: 2000,
     autoplaySpeed: 10000,
-    cssEase: "ease-in-out"
+    cssEase: "ease-in-out",
+    arrows: false
   }
 
   return (
