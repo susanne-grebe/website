@@ -358,7 +358,11 @@ export const PageQuery = graphql`
         footerAddressBarPhoneNumber
         footerAddressBarStreetAndNumber
         footerAddressBarTitle
-        footerBottomBarCopyrightContent
+        footerCopyright {
+          childMarkdownRemark {
+            html
+          }
+        }
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
         footerMiddleBarTopButtonText

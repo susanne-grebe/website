@@ -8,7 +8,7 @@ const Footer = ({ data, logo, lang }) => {
     footerAddressBarPhoneNumber,
     footerAddressBarStreetAndNumber,
     footerAddressBarTitle,
-    footerBottomBarCopyrightContent,
+    footerCopyright,
     footerMiddleBarAboutMeContent,
     footerMiddleBarAboutMeLinkText,
     footerMiddleBarTopButtonText,
@@ -149,7 +149,7 @@ const Footer = ({ data, logo, lang }) => {
     }
   `
 
-  const Copyright = styled.p`
+  const Copyright = styled.div`
     text-align: center;
     @media (min-width: 992px) {
       text-align: left;
@@ -200,13 +200,9 @@ const Footer = ({ data, logo, lang }) => {
         </AboutWrapper>
       </FooterInner>
       <FooterInner>
-        <Copyright>
-          &copy; {year}{" "}
-          <span
-            dangerouslySetInnerHTML={{
-              __html: footerBottomBarCopyrightContent,
-            }}
-          ></span>
+        <Copyright dangerouslySetInnerHTML={{
+          __html: footerCopyright.childMarkdownRemark.html,
+        }}>
         </Copyright>
         <FooterNav>
           <A

@@ -229,7 +229,11 @@ export const BlogQuery = graphql`
         footerAddressBarPhoneNumber
         footerAddressBarStreetAndNumber
         footerAddressBarTitle
-        footerBottomBarCopyrightContent
+        footerCopyright {
+          childMarkdownRemark {
+            html
+          }
+        }
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
         footerMiddleBarTopButtonText

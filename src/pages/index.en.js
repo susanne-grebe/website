@@ -282,7 +282,11 @@ export const LayoutQuery = graphql`
         footerAddressBarPhoneNumber
         footerAddressBarStreetAndNumber
         footerAddressBarTitle
-        footerBottomBarCopyrightContent
+        footerCopyright {
+          childMarkdownRemark {
+            html
+          }
+        }
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
         footerMiddleBarTopButtonText

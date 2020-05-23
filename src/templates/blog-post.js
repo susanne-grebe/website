@@ -252,7 +252,11 @@ export const BlogListQuery = graphql`
         footerAddressBarPhoneNumber
         footerAddressBarStreetAndNumber
         footerAddressBarTitle
-        footerBottomBarCopyrightContent
+        footerCopyright {
+          childMarkdownRemark {
+            html
+          }
+        }
         footerMiddleBarAboutMeContent
         footerMiddleBarAboutMeLinkText
         footerMiddleBarTopButtonText
