@@ -22,6 +22,10 @@ export default ({ data, pageContext }) => {
     &:nth-of-type(${data.allContentfulPageSection.edges.length}) {
       padding-bottom: 6rem;
     }
+    &[data-layout="no-image"] {
+        padding-bottom: 8rem;
+        padding-top: 8rem;
+      }
     &[data-layout="true"] {
       padding-top: 6rem;
       padding-bottom: 6rem;
@@ -58,7 +62,8 @@ export default ({ data, pageContext }) => {
       justify-content: center;
       align-items: center;
       &${Section} {
-        padding-bottom: 0;
+        padding-bottom: 8rem !important;
+        padding-top: 8rem !important;
       }
       div h6,
       div h5,
