@@ -7,45 +7,46 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 
-import SEO from "../components/seo"
 import { JsonLd } from "../components/jsonld"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
-import Coaching from "../components/coaching"
-import Mediation from "../components/mediation"
-import Workshops from "../components/workshops"
-import Aboutme from "../components/aboutme"
-import Overview from "../components/overview"
-import Reviews from "../components/reviews"
+import { Hero } from "../components/HomeHero"
+import { SpaceForSuccess } from "../components/HomeSpaceForSuccess"
+import { Coaching } from "../components/HomeCoaching"
+import { WissenBonbon } from "../components/HomeWissenBonbon"
+import { Tools } from "../components/HomeTools"
+import { About } from "../components/HomeAbout"
+import { Prices } from "../components/HomePrices"
+import { Overview } from "../components/overview"
+import { Reviews } from "../components/HomeReviews"
 import LatetstPosts from "../components/latetst-posts"
 import Footer from "../components/footer/footer"
+import SEO from "../components/seo"
 
-
-
-const IndexPage = ({ data, location }) => {
-  const path = `https://www.susanne-grebe.de`
+const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <SEO title="Startseite" data={data.seoDE} lang="de" path={path} />
-      <JsonLd data={data.localBusinessDE.nodes[0]} />
-      <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={data.heroDE} />
+      <SEO data={ data.seoDE } lang={ "de" }
+           path={ `https://susanne-grebe.de` }/>
+      <JsonLd data={ data.localBusinessDE.nodes[ 0 ] }/>
+      <Navbar logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
+              lang="de"/>
       <main className="main">
-        <Coaching coachingData={data.coachingDE} lang="de" />
-        <Mediation mediationData={data.mediationDE} lang="de" />
-        <Workshops workshopsData={data.workshopsDE} lang="de" />
-        <Aboutme aboutmeData={data.aboutmeDE} lang="de" />
-        <Overview overviewData={data.overviewDE} />
-        <Reviews
-          reviewHeadingData={data.customerReviewHeadingDE}
-          reviewData={data.customerReviewDE}
-        />
-        <LatetstPosts lang="de" data={data.latetsPostsDE} />
+        <Hero data={ data.heroDE }/>
+        <SpaceForSuccess data={ data.spaceForSuccessDE } lang={ "de" }/>
+        <Coaching data={ data.coachingDE } lang={ "de" }/>
+        <WissenBonbon data={ data.wissenDE } lang={ "de" }/>
+        <Tools data={ data.toolsDE } lang={ "de" }/>
+        <About data={ data.aboutDE }/>
+        <Prices data={ data.priceDE } lang={ "de" } height={ "510px" }
+                page={ "index" }/>
+        <Overview data={ data.workDE }/>
+        <Reviews data={ data.reviewsDE }/>
+        <LatetstPosts lang="de" data={ data.latetsPostsDE }/>
       </main>
       <Footer
-        data={data.footerDE.nodes}
-        logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        data={ data.footerDE.nodes }
+        logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
         lang="de"
       />
     </Layout>
@@ -55,307 +56,291 @@ const IndexPage = ({ data, location }) => {
 export default IndexPage
 
 export const LayoutQuery = graphql`
-  query {
-    localBusinessDE: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        seoCompanyCity
-        seoCompanyDescription
-        seoCompanyEmail
-        seoCompanyImage {
-          fluid(
-            maxWidth: 520
-            quality: 80
-            cropFocus: CENTER
-          ) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyLogo {
-          fluid(
-            maxWidth: 520
-            quality: 80
-            cropFocus: CENTER
-          ) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyName
-        seoCompanyOpenTimeFriday
-        seoCompanyOpenTimeMonday
-        seoCompanyOpenTimeSaturday
-        seoCompanyOpenTimeSunday
-        seoCompanyOpenTimeThursday
-        seoCompanyOpenTimeTuesday
-        seoCompanyOpenTimeWednesday
-        seoCompanyPostalcode
-        seoCompanyPriceRange
-        seoCompanyService1Description
-        seoCompanyService1Name
-        seoCompanyService2Description
-        seoCompanyService2Name
-        seoCompanyService3Description
-        seoCompanyService3Name
-        seoCompanyState
-        seoCompanyStreetAddress
-        seoCompanyTelephone
-        seoUrl
-      }
-    }
-    seoDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(
-            maxWidth: 520,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    heroDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageHeroSlogan
-        homePageHeroSubtitle
-        homePageHeroTitle
-        homePageHeroBackgroundImage {
-          fluid(
-            maxWidth: 800,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    coachingDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageCoachingFirstColContent
-        homePageCoachingFirstColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageCoachingFirstColTitle
-        homePageCoachingFooterLinkText
-        homePageCoachingHeading
-        homePageCoachingSubHeading
-        homePageCoachingSecondColContent
-        homePageCoachingSecondColImage {
-          fixed(width: 600, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageCoachingSecondColTitle
-        homePageCoachingThirdColContent
-        homePageCoachingThirdColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageCoachingThirdColTitle
-      }
-    }
-    mediationDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageMediationHeading
-        homePageMediationSubHeading
-        homePageMediationFooterLinkText
-        homePageMediationContent {
-          childMarkdownRemark {
-            html
-          }
-        }
-        homePageMediationImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-      }
-    }
-    workshopsDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageWorkshopsHeading
-        homePageWorkshopsSubHeading
-        homePageWorkshopsFirstColTitle
-        homePageWorkshopsFirstColContent
-        homePageWorkshopsSecondColTitle
-        homePageWorkshopsSecondColContent
-        homePageWorkshopsThirdColTitle
-        homePageWorkshopsThirdColContent
-        homePageWorkshopsFirstColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageWorkshopsSecondColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageWorkshopsThirdColImage {
-          fixed(
-            width: 600,
-            quality: 80,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageWorkshopsFooterLinkText
-      }
-    }
-    aboutmeDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageAboutMeHeading
-        homePageAboutMeImage {
-          fixed(
-            width: 600,
-            cropFocus: CENTER,
-            quality: 80,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-        homePageAboutMeContent {
-          childMarkdownRemark {
-            html
-          }
-        }
-        homePageAboutMeLinkText
-      }
-    }
-    overviewDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageOverviewFirstColNumber
-        homePageOverviewFirstColTitle
-        homePageOverviewHeading
-        homePageOverviewSecondColNumber
-        homePageOverviewSecondColTitle
-        homePageOverviewThirdColNumber
-        homePageOverviewThirdColTitle
-      }
-    }
-    customerReviewHeadingDE: allContentfulHomePage(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        homePageCustomerReviewHeading
-      }
-    }
-    customerReviewDE: allContentfulCustomerReviews(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      edges {
-        node {
-          customerReviewsAvatar {
-            fixed(
-              width: 100,
-              quality: 80,
-              height: 100,
-            ) {
-              ...GatsbyContentfulFixed_withWebp
-            }
+    query {
+        seoDE: contentfulHomePageSeo(node_locale: {eq: "de"}) {
+            title
+            keywords
             description
-          }
-          customerReviewsName
-          customerReviewsReview
-          customerReviewsServiceDelivered
-          customersReviewsJobTitle
-        }
-      }
-    }
-    latetsPostsDE: allContentfulBlogPost(
-      filter: { node_locale: { eq: "de" } }
-      sort: { fields: createdAt, order: DESC }
-      limit: 3
-    ) {
-      edges {
-        node {
-          blogPostTitle
-          blogPostExcerpt {
-            childMarkdownRemark {
-              html
-              excerpt(pruneLength: 100)
+            image {
+                fluid(
+                    maxWidth: 520
+                    quality: 80
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
             }
-          }
-          blogPostImage {
-            fluid(
-              maxWidth: 624,
-              quality: 80,
-              cropFocus: CENTER,
-            ) {
-              ...GatsbyContentfulFluid_withWebp
+        }
+        heroDE: contentfulHomePageHeroSection(node_locale: {eq: "de"}) {
+            backgroundImage {
+                fluid(
+                    quality: 100
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
             }
-            description
-          }
-          blogPostSlug
+            slogan
+            subTitle
+            title
+            textRight
         }
-      }
+        spaceForSuccessDE: contentfulHomePageSpaceForSuccessSection(node_locale: {eq: "de"}) {
+            title
+            buttonText
+            image {
+                fluid(
+                    maxWidth: 520
+                    quality: 80
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+            text {
+                childMarkdownRemark {
+                    html
+                }
+            }
+        }
+        coachingDE: contentfulHomePageCoachingOffersSection(node_locale: {eq: "de"}) {
+            title
+            coachingContactButtonText
+            coachingCards {
+                title
+                imageRight
+                image {
+                    fluid(
+                        maxWidth: 520
+                        quality: 80
+                        cropFocus: CENTER
+                    ) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                text {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+            }
+        }
+        wissenDE: contentfulHomePageWissenbonbonSection(node_locale: {eq: "de"}) {
+            title
+            image {
+                fluid(
+                    maxWidth: 520
+                    quality: 80
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+            text {
+                childMarkdownRemark {
+                    html
+                }
+            }
+        }
+        toolsDE: contentfulHomePageToolSection(node_locale: {eq: "de"}) {
+            title
+            toolsContactButtonText
+            image {
+                fluid(
+                    maxWidth: 520
+                    quality: 80
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+            text {
+                childMarkdownRemark {
+                    html
+                }
+            }
+            tools {
+                title
+                sort
+                module1
+                module2
+                module3
+                module4
+                seminarContent
+                text {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+            }
+        }
+        aboutDE: contentfulHomePageAboutMeSection(node_locale: {eq: "de"}) {
+            title
+            text {
+                childMarkdownRemark {
+                    html
+                }
+            }
+            image {
+                fluid(
+                    maxWidth: 520
+                    quality: 80
+                    cropFocus: CENTER
+                ) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+            qualifications {
+                title
+                qualifications
+            }
+            competences {
+                title
+                competences
+            }
+        }
+        priceDE: contentfulHomePagePricingSection(node_locale: {eq: "de"}) {
+            title
+            cards {
+                whatsIncluded
+                title
+                text
+                price
+                buttonText
+            }
+            footer
+            footerStudent
+            footerStudentButtonText
+        }
+        workDE: contentfulHomePageWorkForClientsSection(node_locale: {eq: "de"}) {
+            title
+            col1Number
+            col1Text
+            col2Number
+            col2Text
+            col3Number
+            col3Text
+        }
+        reviewsDE: contentfulHomePageCustomerReviewSection(node_locale: {eq: "de"}) {
+            cards {
+                customersReviewsJobTitle
+                customerReviewsServiceDelivered
+                customerReviewsReview
+                customerReviewsName
+                customerReviewsAvatar {
+                    fluid(
+                        maxWidth: 520
+                        quality: 80
+                        cropFocus: CENTER
+                    ) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                    description
+                }
+            }
+            title
+        }
+        localBusinessDE: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                seoCompanyCity
+                seoCompanyDescription
+                seoCompanyEmail
+                seoCompanyImage {
+                    fluid(
+                        maxWidth: 520
+                        quality: 80
+                        cropFocus: CENTER
+                    ) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyLogo {
+                    fluid(
+                        maxWidth: 520
+                        quality: 80
+                        cropFocus: CENTER
+                    ) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyName
+                seoCompanyOpenTimeFriday
+                seoCompanyOpenTimeMonday
+                seoCompanyOpenTimeSaturday
+                seoCompanyOpenTimeSunday
+                seoCompanyOpenTimeThursday
+                seoCompanyOpenTimeTuesday
+                seoCompanyOpenTimeWednesday
+                seoCompanyPostalcode
+                seoCompanyPriceRange
+                seoCompanyService1Description
+                seoCompanyService1Name
+                seoCompanyService2Description
+                seoCompanyService2Name
+                seoCompanyService3Description
+                seoCompanyService3Name
+                seoCompanyState
+                seoCompanyStreetAddress
+                seoCompanyTelephone
+                seoUrl
+            }
+        }
+        latetsPostsDE: allContentfulBlogPost(
+            filter: { node_locale: { eq: "de" } }
+            sort: { fields: createdAt, order: DESC }
+            limit: 3
+        ) {
+            edges {
+                node {
+                    blogPostTitle
+                    blogPostExcerpt {
+                        childMarkdownRemark {
+                            html
+                            excerpt(pruneLength: 100)
+                        }
+                    }
+                    blogPostImage {
+                        fluid(
+                            maxWidth: 624,
+                            quality: 80,
+                            cropFocus: CENTER,
+                        ) {
+                            ...GatsbyContentfulFluid_withWebp
+                        }
+                        description
+                    }
+                    blogPostSlug
+                }
+            }
+        }
+        footerDE: allContentfulFooterContent(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(
+                        width: 60,
+                        height: 60,
+                        cropFocus: CENTER,
+                    ) {
+                        ...GatsbyContentfulFixed_withWebp
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerDE: allContentfulFooterContent(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(
-            width: 60,
-            height: 60,
-            cropFocus: CENTER,
-          ) {
-            ...GatsbyContentfulFixed_withWebp
-          }
-          description
-        }
-      }
-    }
-  }
 `

@@ -1,25 +1,25 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
+import { ThemeContext } from "styled-components"
 
 const Footer = ({ data, logo, lang }) => {
+  const theme = useContext(ThemeContext)
   const {
     footerAddressBarPhoneNumber,
     footerAddressBarStreetAndNumber,
     footerAddressBarTitle,
     footerCopyright,
     footerMiddleBarAboutMeContent,
-    footerMiddleBarAboutMeLinkText,
     footerMiddleBarTopButtonText,
-  } = data[0]
-
-  const year = new Date().getFullYear()
+  } = data[ 0 ]
 
   const Footer = styled.footer`
     background-color: #fdfbf6;
-    padding: 1rem;
+    padding: 50px 0;
     min-height: 200px;
+    font-weight: 400;
   `
 
   const FooterInner = styled.div`
@@ -52,7 +52,7 @@ const Footer = ({ data, logo, lang }) => {
       &:nth-of-type(2) {
         flex-direction: row;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: space-between;
       }
     }
     @media (min-width: 992px) {
@@ -73,7 +73,7 @@ const Footer = ({ data, logo, lang }) => {
   `
 
   const A = styled(Link)`
-    color: #aa5d00;
+    color: #ffffff;
     transition: all 0.3s ease-in-out;
     &:hover,
     &:focus {
@@ -91,25 +91,23 @@ const Footer = ({ data, logo, lang }) => {
   `
 
   const Button = styled(Link)`
-    font-size: 1rem;
-    padding: 0.5rem;
-    color: #aa5d00;
-    border: 1px solid #aa5d00;
-    border-radius: 5px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
+    max-width: 250px;
+    margin: 35px auto 40px auto;
     width: 100%;
-    height: 40px;
-    background-color: transparent;
+    padding: 12px 20px;
+    background-color: ${ theme.colors.primary };
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: 400;
     text-align: center;
-    margin: 2rem 0;
-    &:hover,
-    &:focus {
-      background-color: #aa5d00;
-      border-color: #aa5d00;
-      color: #fff !important;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 16%);
+    
+    :hover, :focus {
+      color: #ffffff;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 16%);
     }
+    
     @media (min-width: 768px) {
       width: 250px;
       margin: 1.5rem 0;
@@ -117,14 +115,16 @@ const Footer = ({ data, logo, lang }) => {
   `
 
   const Logo = styled(Img)`
-    width: 60px;
-    height: 35px;
+    width: 100px;
+    height: 55px;
     margin: 1.5rem 1rem 0 1rem;
   `
 
   const AddressTitle = styled.h3``
 
-  const Address = styled.p``
+  const Address = styled.p`
+    font-weight: 400;
+  `
 
   const AboutWrapper = styled.div`
     width: 100%;
@@ -132,7 +132,7 @@ const Footer = ({ data, logo, lang }) => {
     flex-direction: row;
     margin-bottom: 2rem;
     @media (min-width: 768px) {
-      width: 80%;
+      width: 70%;
       margin: 0;
     }
   `
@@ -168,7 +168,6 @@ const Footer = ({ data, logo, lang }) => {
   `
 
   const pathContact = lang === "de" ? `/kontakt` : `/en/contact`
-  const pathAbout = lang === "de" ? `/uber-mich` : `/en/about-me`
   const pathCookie = lang === "de" ? `/impressum` : `/en/legal-notice`
   const pathData = lang === "de" ? `/datenschutz` : `/en/data-protection`
   // const pathSitemap = lang === "de" ? `/seitenverzeichnis` : `/en/sitemap`
@@ -176,59 +175,56 @@ const Footer = ({ data, logo, lang }) => {
   return (
     <Footer>
       <FooterInner>
-        <AddressTitle>{footerAddressBarTitle}</AddressTitle>
-        <Address>{footerAddressBarStreetAndNumber}</Address>
-        <a href={`tel:${footerAddressBarPhoneNumber}`}>
-          {footerAddressBarPhoneNumber}
+        <AddressTitle>{ footerAddressBarTitle }</AddressTitle>
+        <Address>{ footerAddressBarStreetAndNumber }</Address>
+        <a href={ `tel:${ footerAddressBarPhoneNumber }` }>
+          { footerAddressBarPhoneNumber }
         </a>
       </FooterInner>
       <FooterInner>
-        <Button role="button" to={pathContact}>
-          {footerMiddleBarTopButtonText}
+        <Button role="button" to={ pathContact }>
+          { footerMiddleBarTopButtonText }
         </Button>
         <AboutWrapper>
           <Logo
-            fluid={logo.fluid}
+            fluid={ logo.fluid }
             alt="Susanne Grebe - coaching, mediation & workshops"
           />
           <AboutContent>
-            <p>{footerMiddleBarAboutMeContent}</p>
-            <p>
-              <A to={pathAbout}>{footerMiddleBarAboutMeLinkText}</A>
-            </p>
+            <p>{ footerMiddleBarAboutMeContent }</p>
           </AboutContent>
         </AboutWrapper>
       </FooterInner>
       <FooterInner>
-        <Copyright dangerouslySetInnerHTML={{
+        <Copyright dangerouslySetInnerHTML={ {
           __html: footerCopyright.childMarkdownRemark.html,
-        }}>
+        } }>
         </Copyright>
         <FooterNav>
           <A
             className="footer-link mt-2 mt-md-1 mb-1 mt-lg-0 mb-lg-0"
-            to={pathCookie}
+            to={ pathCookie }
           >
-            {lang === "de" ? `Impressum` : `Legal Notice`}
+            { lang === "de" ? `Impressum` : `Legal Notice` }
           </A>
           <A
             className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
-            to={pathData}
+            to={ pathData }
           >
-            {lang === "de" ? `Datenschutz` : `Data Protection`}
+            { lang === "de" ? `Datenschutz` : `Data Protection` }
           </A>
-          {/* TODO: create sitemap page */}
+          {/* TODO: create sitemap page */ }
           {/* <A
-            className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
-            to={pathSitemap}
-          >
-            {lang === "de" ? `Seitenverzeichnis` : `Sitemap`}
-          </A> */}
+           className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
+           to={pathSitemap}
+           >
+           {lang === "de" ? `Seitenverzeichnis` : `Sitemap`}
+           </A> */ }
           <A
             className="footer-link mt-1 mb-1 mt-lg-0 mb-lg-0 ml-lg-3"
-            to={pathLanguage}
+            to={ pathLanguage }
           >
-            {lang === "de" ? `English Site` : `German Site`}
+            { lang === "de" ? `English Site` : `German Site` }
           </A>
         </FooterNav>
       </FooterInner>

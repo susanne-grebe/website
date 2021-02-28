@@ -2,7 +2,7 @@
  * @description CONTACT PAGE ENGLISH
  */
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import styled from "@emotion/styled"
 import Img from "gatsby-image"
@@ -15,14 +15,13 @@ import {
 } from "react-icons/fa"
 
 import Layout from "../components/layout"
-
-import SEO from "../components/seo"
 import { JsonLd } from "../components/jsonld"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
 import GoogleMap from "../components/map/index"
 import Footer from "../components/footer/footer"
+import { Hero } from "../components/HomeHero"
+import SEO from "../components/seo"
 
 const Section = styled.section`
   position: relative;
@@ -62,6 +61,12 @@ const Form = styled.form`
   width: 100%;
   @media (min-width: 768px) {
     width: 50%;
+    padding-left: 50px;
+    margin: 2rem auto;
+  }
+  
+  .no-margin-top {
+    margin-top: 0;
   }
 `
 
@@ -212,83 +217,104 @@ const SocialProfileItem = styled.li`
 `
 
 const IndexPage = ({ data, location }) => {
-  const [checked, setChecked] = useState(false)
+  const [ checked, setChecked ] = useState(false)
+  const [ selectState, setSelectState ] = useState("Raum für Erfolg")
+  const [ locationState, setLocationState ] = useState(null)
+  
+  useEffect(() => {
+    if ( location.state ) {
+      setLocationState(location.state.choice)
+    } else {
+      return null
+    }
+
+    setSelectState(locationState)
+  }, [ locationState ])
 
   const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: "Contact Me",
-        homePageHeroSubtitle: "Do you have any questions?",
-        homePageHeroSlogan: "",
-        homePageHeroBackgroundImage:
-          data.localBusinessEN.nodes[0].seoCompanyImage,
-      },
-    ],
+    title: "Contact Me",
+    subTitle: "",
+    slogan: "Do you have any questions?",
+    backgroundImage: data.localBusinessEN.nodes[ 0 ].seoCompanyImage,
+    textRight: true,
+    overlay: true,
+  }
+
+  const seoData = {
+    title: "Susanne Grebe - Contact Me",
+    description: "Do you still have questions about leadership, career or mental coaching? Fill out the form and I will answer your questions within 24hours.",
+    keywords: [],
+    image: data.localBusinessEN.nodes[ 0 ].seoCompanyImage,
   }
 
   const handleCheckboxChange = () => {
     setChecked(!checked)
   }
 
+  const handleSelectChange = (evt) => {
+    evt.preventDefault()
+    setSelectState(evt.target.value)
+  }
+
   const path = `https://www.susanne-grebe.de/en/contact`
 
   return (
     <Layout>
-      <SEO title="Contact" data={data.seoEN} lang="en" path={path} />
-      <JsonLd data={data.localBusinessEN.nodes[0]} />
-      <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} />
-      <Hero heroData={heroData} height='small' />
+      <SEO data={ seoData } lang="en" path={ path }/>
+      <JsonLd data={ data.localBusinessEN.nodes[ 0 ] }/>
+      <Navbar logo={ data.localBusinessEN.nodes[ 0 ].seoCompanyLogo }/>
+      <Hero data={ heroData }/>
       <main className="main">
         <Section>
           <SectionInner>
             <SectionContactInfo>
-              <h2>{data.authorEN.edges[0].node.authorName}</h2>
+              <h2>{ data.authorEN.edges[ 0 ].node.authorName }</h2>
               <AboutImg
-                fluid={data.localBusinessEN.nodes[0].seoCompanyImage.fluid}
+                fluid={ data.localBusinessEN.nodes[ 0 ].seoCompanyImage.fluid }
                 loading="lazy"
               />
               <p
-                dangerouslySetInnerHTML={{
+                dangerouslySetInnerHTML={ {
                   __html:
-                    data.authorEN.edges[0].node.authorBio.childMarkdownRemark
-                      .html,
-                }}
+                  data.authorEN.edges[ 0 ].node.authorBio.childMarkdownRemark
+                    .html,
+                } }
               />
               <SocialProfiles>
                 <SocialProfileItem>
                   <a
-                    href={data.authorEN.edges[0].node.authorFacebook}
+                    href={ data.authorEN.edges[ 0 ].node.authorFacebook }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaFacebookSquare />
+                    <FaFacebookSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorEN.edges[0].node.authorInstagram}
+                    href={ data.authorEN.edges[ 0 ].node.authorInstagram }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaInstagramSquare />
+                    <FaInstagramSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorEN.edges[0].node.authorLinkedIn}
+                    href={ data.authorEN.edges[ 0 ].node.authorLinkedIn }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaLinkedin />
+                    <FaLinkedin/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorEN.edges[0].node.authorTwitter}
+                    href={ data.authorEN.edges[ 0 ].node.authorTwitter }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaTwitterSquare />
+                    <FaTwitterSquare/>
                   </a>
                 </SocialProfileItem>
               </SocialProfiles>
@@ -300,7 +326,7 @@ const IndexPage = ({ data, location }) => {
               data-netlify="true"
               action='/success'
             >
-              <input type="hidden" name="form-name" value="contact_en" />
+              <input type="hidden" name="form-name" value="contact_en"/>
               <FormGroup data-visible="false">
                 <FormLabel htmlFor="botfield">
                   <h3>Do not fill this out if you are a human being</h3>
@@ -311,7 +337,7 @@ const IndexPage = ({ data, location }) => {
                   id="botfield"
                 />
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={ "no-margin-top" }>
                 <FormLabel htmlFor="name">
                   <h3>Your Name</h3>
                 </FormLabel>
@@ -351,24 +377,61 @@ const IndexPage = ({ data, location }) => {
                 <FormLabel htmlFor="thema">
                   <h3>Your Subject</h3>
                 </FormLabel>
-                <FormSelect name="thema" id="thema">
+                <FormSelect name="thema" id="thema" value={ selectState }
+                            onChange={ handleSelectChange }>
                   <FormSelectOption
-                    value="coaching"
-                    aria-label="coaching subject"
+                    value="Coaching Offers"
+                    aria-label="Coaching Offers"
                   >
-                    Coaching
+                    Coaching Offers
                   </FormSelectOption>
                   <FormSelectOption
-                    value="mediation"
-                    aria-label="mediation subject"
+                    value="Facial expression"
+                    aria-label="Facial expression"
                   >
-                    Mediation
+                    Facial expression
                   </FormSelectOption>
                   <FormSelectOption
-                    value="workshops"
-                    aria-label="workshops subject"
+                    value="Space for success"
+                    aria-label="Space for success"
                   >
-                    Workshops
+                    Space for success
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Coaching Individual"
+                    aria-label="Coaching Individual"
+                  >
+                    Coaching Individual
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Coaching Package"
+                    aria-label="Coaching Package"
+                  >
+                    Coaching Package
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Knowledge Candy"
+                    aria-label="Knowledge Candy"
+                  >
+                    Knowledge Candy
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimic Introduction"
+                    aria-label="Mimic Introduction"
+                  >
+                    Mimic Introduction
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimic Basic"
+                    aria-label="Mimic Basic"
+                  >
+                    Mimic Basic
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimic Professional"
+                    aria-label="Mimic Professional"
+                  >
+                    Mimic Professional
                   </FormSelectOption>
                   <FormSelectOption value="other" aria-label="Something Else">
                     Something Else
@@ -382,25 +445,26 @@ const IndexPage = ({ data, location }) => {
                 <FormTextarea
                   id="frage"
                   name="message"
-                  placeholder="Ihre Frage"
-                  aria-label="ihre frage"
+                  placeholder="Your question"
+                  aria-label="Your question"
                   rows="5"
-                ></FormTextarea>
+                />
               </FormGroup>
               <FormGroup>
                 <p>
                   <input
-                    defaultChecked={checked === true ? "checked" : ""}
-                    onChange={() => handleCheckboxChange()}
+                    defaultChecked={ checked === true ? "checked" : "" }
+                    onChange={ () => handleCheckboxChange() }
                     type="checkbox"
-                    style={{ marginRight: "1rem" }}
+                    style={ { marginRight: "1rem" } }
                   />
-                  I have read the <a href="/en/data-protection">cookie policy</a>{" "}
-                  and agree to it...{" "}
+                  I have read the <a href="/en/data-protection">cookie
+                  policy</a>{ " " }
+                  and agree to it...{ " " }
                 </p>
               </FormGroup>
               <FormGroup>
-                <FormButton type="submit" disabled={!checked}>
+                <FormButton type="submit" disabled={ !checked }>
                   Send
                 </FormButton>
               </FormGroup>
@@ -408,25 +472,30 @@ const IndexPage = ({ data, location }) => {
           </SectionInner>
         </Section>
         <Section
-          style={{ paddingLeft: "0", paddingRight: "0", paddingBottom: "0", paddingTop: '0' }}
+          style={ {
+            paddingLeft: "0",
+            paddingRight: "0",
+            paddingBottom: "0",
+            paddingTop: "0",
+          } }
         >
           <GoogleMap
-            companyName={data.localBusinessEN.nodes[0].seoCompanyName}
+            companyName={ data.localBusinessEN.nodes[ 0 ].seoCompanyName }
             companyAddress={
-              data.localBusinessEN.nodes[0].seoCompanyStreetAddress
+              data.localBusinessEN.nodes[ 0 ].seoCompanyStreetAddress
             }
             companyPostalCode={
-              data.localBusinessEN.nodes[0].seoCompanyPostalcode
+              data.localBusinessEN.nodes[ 0 ].seoCompanyPostalcode
             }
-            companyCity={data.localBusinessEN.nodes[0].seoCompanyCity}
-            companyEmail={data.localBusinessEN.nodes[0].seoCompanyEmail}
-            companyPhone={data.localBusinessEN.nodes[0].seoCompanyTelephone}
+            companyCity={ data.localBusinessEN.nodes[ 0 ].seoCompanyCity }
+            companyEmail={ data.localBusinessEN.nodes[ 0 ].seoCompanyEmail }
+            companyPhone={ data.localBusinessEN.nodes[ 0 ].seoCompanyTelephone }
           />
         </Section>
       </main>
       <Footer
-        data={data.footerEN.nodes}
-        logo={data.localBusinessEN.nodes[0].seoCompanyLogo}
+        data={ data.footerEN.nodes }
+        logo={ data.localBusinessEN.nodes[ 0 ].seoCompanyLogo }
       />
     </Layout>
   )
@@ -435,115 +504,89 @@ const IndexPage = ({ data, location }) => {
 export default IndexPage
 
 export const LayoutQuery = graphql`
-  query {
-    localBusinessEN: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "en" } }
-    ) {
-      nodes {
-        seoCompanyCity
-        seoCompanyDescription
-        seoCompanyEmail
-        seoCompanyImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyName
-        seoCompanyOpenTimeFriday
-        seoCompanyOpenTimeMonday
-        seoCompanyOpenTimeSaturday
-        seoCompanyOpenTimeSunday
-        seoCompanyOpenTimeThursday
-        seoCompanyOpenTimeTuesday
-        seoCompanyOpenTimeWednesday
-        seoCompanyPostalcode
-        seoCompanyPriceRange
-        seoCompanyService1Description
-        seoCompanyService1Name
-        seoCompanyService2Description
-        seoCompanyService2Name
-        seoCompanyService3Description
-        seoCompanyService3Name
-        seoCompanyState
-        seoCompanyStreetAddress
-        seoCompanyTelephone
-        seoUrl
-      }
-    }
-    seoEN: allContentfulHomePage(filter: { node_locale: { eq: "en" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    heroEN: allContentfulHomePage(filter: { node_locale: { eq: "en" } }) {
-      nodes {
-        homePageHeroSlogan
-        homePageHeroSubtitle
-        homePageHeroTitle
-        homePageHeroBackgroundImage {
-          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    authorEN: allContentfulAuthor(filter: { node_locale: { eq: "en" } }) {
-      edges {
-        node {
-          authorBio {
-            childMarkdownRemark {
-              html
+    query {
+        localBusinessEN: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "en" } }
+        ) {
+            nodes {
+                seoCompanyCity
+                seoCompanyDescription
+                seoCompanyEmail
+                seoCompanyImage {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyName
+                seoCompanyOpenTimeFriday
+                seoCompanyOpenTimeMonday
+                seoCompanyOpenTimeSaturday
+                seoCompanyOpenTimeSunday
+                seoCompanyOpenTimeThursday
+                seoCompanyOpenTimeTuesday
+                seoCompanyOpenTimeWednesday
+                seoCompanyPostalcode
+                seoCompanyPriceRange
+                seoCompanyService1Description
+                seoCompanyService1Name
+                seoCompanyService2Description
+                seoCompanyService2Name
+                seoCompanyService3Description
+                seoCompanyService3Name
+                seoCompanyState
+                seoCompanyStreetAddress
+                seoCompanyTelephone
+                seoUrl
             }
-          }
-          authorImage {
-            fixed(width: 600, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
+        }
+        authorEN: allContentfulAuthor(filter: { node_locale: { eq: "en" } }) {
+            edges {
+                node {
+                    authorBio {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    authorImage {
+                        fixed(width: 600, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFixed_withWebp_noBase64
+                        }
+                    }
+                    authorName
+                    authorFacebook
+                    authorInstagram
+                    authorLinkedIn
+                    authorTwitter
+                }
             }
-          }
-          authorName
-          authorFacebook
-          authorInstagram
-          authorLinkedIn
-          authorTwitter
         }
-      }
+        footerEN: allContentfulFooterContent(
+            filter: { node_locale: { eq: "en" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 60, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerEN: allContentfulFooterContent(
-      filter: { node_locale: { eq: "en" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `

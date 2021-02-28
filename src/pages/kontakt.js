@@ -2,9 +2,8 @@
  * @description CONTACT PAGE GERMAN
  */
 
-import React, { useState } from "react"
-import Helmet from "react-helmet"
-import { graphql } from "gatsby"
+import React, { useEffect, useState } from "react"
+import { graphql, Link } from "gatsby"
 import styled from "@emotion/styled"
 import Img from "gatsby-image"
 
@@ -16,14 +15,13 @@ import {
 } from "react-icons/fa"
 
 import Layout from "../components/layout"
-
-import SEO from "../components/seo"
 import { JsonLd } from "../components/jsonld"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
 import GoogleMap from "../components/map/index"
 import Footer from "../components/footer/footer"
+import { Hero } from "../components/HomeHero"
+import SEO from "../components/seo"
 
 const Section = styled.section`
   position: relative;
@@ -48,7 +46,7 @@ const SectionInner = styled.div`
     flex-direction: row;
     max-width: 720px;
   }
-  @media (min-width: 1025px) {
+  @media (min-width: 1024px) {
     max-width: 1280px;
   }
 `
@@ -63,6 +61,12 @@ const Form = styled.form`
   width: 100%;
   @media (min-width: 768px) {
     width: 50%;
+    padding-left: 50px;
+    margin: 2rem auto;
+  }
+  
+  .no-margin-top {
+    margin-top: 0;
   }
 `
 
@@ -214,94 +218,105 @@ const SocialProfileItem = styled.li`
 `
 
 const IndexPage = ({ data, location }) => {
-  const [checked, setChecked] = useState(false)
+  const [ checked, setChecked ] = useState(false)
+  const [ selectState, setSelectState ] = useState("Raum für Erfolg")
+  const [ locationState, setLocationState ] = useState(null)
+
+  useEffect(() => {
+    if ( location.state ) {
+      setLocationState(location.state.choice)
+    } else {
+      return null
+    }
+
+    setSelectState(locationState)
+  }, [ locationState ])
 
   const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: "Kontakt aufnehmen",
-        homePageHeroSubtitle: "Haben Sie noch Fragen?",
-        homePageHeroSlogan: "",
-        homePageHeroBackgroundImage:
-          data.localBusinessDE.nodes[0].seoCompanyImage,
-      },
-    ],
+    title: "Kontakt aufnehmen",
+    subTitle: "",
+    slogan: "Haben Sie noch Fragen?",
+    backgroundImage: data.localBusinessDE.nodes[ 0 ].seoCompanyImage,
+    textRight: true,
+    overlay: true,
+  }
+
+  const seoData = {
+    title: "Susanne Grebe - Kontakt aufnehmen",
+    description: "Haben Sie noch Fragen zu Führung, Karriere oder Mentalcoaching? Füllen Sie das Formular aus und ich werde Ihre Fragen innerhalb von 24 Stunden beantworten.",
+    keywords: [],
+    image: data.localBusinessDE.nodes[ 0 ].seoCompanyImage,
   }
 
   const handleCheckboxChange = () => {
     setChecked(!checked)
   }
 
+  const handleSelectChange = (evt) => {
+    evt.preventDefault()
+    setSelectState(evt.target.value)
+  }
+
   const path = `https://www.susanne-grebe.de/kontakt`
 
   return (
     <Layout>
-      <SEO title="Kontakt" data={data.seoDE} lang="de" path={path} />
-      <JsonLd data={data.localBusinessDE.nodes[0]} />
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "http://schema.org",
-            "@type": "ContactPage",
-            "name": `${data.seoDE.nodes[0].SeoTitle} | ${data.heroDE.nodes[0].homePageHeroTitle}`,
-            "description": `${data.seoDE.nodes[0].SeoDescription}`,
-            "breadcrumb": "Startseite > Kontakt"
-          })}
-        </script>
-      </Helmet>
-      <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={heroData} height='small' />
+      <SEO data={ seoData } lang="de" path={ path }/>
+      <JsonLd data={ data.localBusinessDE.nodes[ 0 ] }/>
+      <Navbar logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
+              lang="de"/>
+      <Hero data={ heroData }/>
       <main className="main">
         <Section>
           <SectionInner>
             <SectionContactInfo>
-              <h2>{data.authorDE.edges[0].node.authorName}</h2>
+              <h2>{ data.authorDE.edges[ 0 ].node.authorName }</h2>
               <AboutImg
-                fluid={data.localBusinessDE.nodes[0].seoCompanyImage.fluid}
+                fluid={ data.localBusinessDE.nodes[ 0 ].seoCompanyImage.fluid }
                 loading="lazy"
               />
               <p
-                dangerouslySetInnerHTML={{
+                dangerouslySetInnerHTML={ {
                   __html:
-                    data.authorDE.edges[0].node.authorBio.childMarkdownRemark
-                      .html,
-                }}
+                  data.authorDE.edges[ 0 ].node.authorBio.childMarkdownRemark
+                    .html,
+                } }
               />
               <SocialProfiles>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorFacebook}
+                    href={ data.authorDE.edges[ 0 ].node.authorFacebook }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaFacebookSquare />
+                    <FaFacebookSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorInstagram}
+                    href={ data.authorDE.edges[ 0 ].node.authorInstagram }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaInstagramSquare />
+                    <FaInstagramSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorLinkedIn}
+                    href={ data.authorDE.edges[ 0 ].node.authorLinkedIn }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaLinkedin />
+                    <FaLinkedin/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorTwitter}
+                    href={ data.authorDE.edges[ 0 ].node.authorTwitter }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaTwitterSquare />
+                    <FaTwitterSquare/>
                   </a>
                 </SocialProfileItem>
               </SocialProfiles>
@@ -313,7 +328,7 @@ const IndexPage = ({ data, location }) => {
               data-netlify="true"
               action="/erfolgreich"
             >
-              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="form-name" value="contact"/>
               <FormGroup data-visible="false">
                 <FormLabel htmlFor="botfield">
                   <h3>Füllen Sie das nicht aus, wenn Sie ein Mensch sind</h3>
@@ -324,7 +339,7 @@ const IndexPage = ({ data, location }) => {
                   id="botfield"
                 />
               </FormGroup>
-              <FormGroup>
+              <FormGroup className={ "no-margin-top" }>
                 <FormLabel htmlFor="name">
                   <h3>Ihre Name</h3>
                 </FormLabel>
@@ -364,24 +379,68 @@ const IndexPage = ({ data, location }) => {
                 <FormLabel htmlFor="thema">
                   <h3>Ihr Thema</h3>
                 </FormLabel>
-                <FormSelect name="thema" id="thema">
+                <FormSelect name="thema" id="thema"
+                            value={ selectState }
+                            onChange={ handleSelectChange }>
                   <FormSelectOption
-                    value="coaching"
-                    aria-label="coaching thema"
+                    value="Coaching Angebote"
+                    aria-label="Caoching Angebote"
                   >
-                    Coaching
+                    Coaching Angebote
                   </FormSelectOption>
                   <FormSelectOption
-                    value="mediation"
-                    aria-label="mediation thema"
+                    value="Mimikresonanz"
+                    aria-label="Mimikresonanz"
                   >
-                    Mediation
+                    Mimikresonanz
                   </FormSelectOption>
                   <FormSelectOption
-                    value="workshops"
-                    aria-label="workshops thema"
+                    value="Raum für Erfolg - Monatlich"
+                    aria-label="Raum für Erfolg - Monatlich"
                   >
-                    Workshops
+                    Raum für Erfolg - Monatlich
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Raum für Erfolg - Paket"
+                    aria-label="Raum für Erfolg - Paket"
+                  >
+                    Raum für Erfolg - Paket
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Coaching Einzel"
+                    aria-label="Coaching Einzel"
+                  >
+                    Coaching Einzel
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Coaching Paket"
+                    aria-label="Coaching Paket"
+                  >
+                    Coaching Paket
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Wissen Bonbon"
+                    aria-label="Wissen Bonbon"
+                  >
+                    Wissen Bonbon
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimik Einführungs"
+                    aria-label="Mimik Einführungs"
+                  >
+                    Mimik Einführungs
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimik Grundlegend"
+                    aria-label="Mimik Grundlegend"
+                  >
+                    Mimik Grundlegend
+                  </FormSelectOption>
+                  <FormSelectOption
+                    value="Mimik Professional"
+                    aria-label="Mimik Professional"
+                  >
+                    Mimik Professional
                   </FormSelectOption>
                   <FormSelectOption value="other" aria-label="etwas anderes">
                     Etwas anderes
@@ -398,23 +457,23 @@ const IndexPage = ({ data, location }) => {
                   placeholder="Ihre Frage"
                   aria-label="Ihre Frage / Nachricht"
                   rows="5"
-                ></FormTextarea>
+                />
               </FormGroup>
               <FormGroup>
                 <p>
                   <input
-                    defaultChecked={checked === true ? "checked" : ""}
-                    onChange={() => handleCheckboxChange()}
+                    defaultChecked={ checked === true ? "checked" : "" }
+                    onChange={ () => handleCheckboxChange() }
                     type="checkbox"
-                    style={{ marginRight: "1rem" }}
+                    style={ { marginRight: "1rem" } }
                   />
-                  Ich habe die{" "}
-                  <a href="/datenschutz">Cookie-Richtlinie</a> gelesen und
-                  bin damit einverstanden...{" "}
+                  Ich habe die{ " " }
+                  <Link to="/datenschutz">Cookie-Richtlinie</Link> gelesen und
+                  bin damit einverstanden...{ " " }
                 </p>
               </FormGroup>
               <FormGroup>
-                <FormButton type="submit" disabled={!checked}>
+                <FormButton type="submit" disabled={ !checked }>
                   Senden
                 </FormButton>
               </FormGroup>
@@ -422,25 +481,30 @@ const IndexPage = ({ data, location }) => {
           </SectionInner>
         </Section>
         <Section
-          style={{ paddingLeft: "0", paddingRight: "0", paddingBottom: "0", paddingTop: '0' }}
+          style={ {
+            paddingLeft: "0",
+            paddingRight: "0",
+            paddingBottom: "0",
+            paddingTop: "0",
+          } }
         >
           <GoogleMap
-            companyName={data.localBusinessDE.nodes[0].seoCompanyName}
+            companyName={ data.localBusinessDE.nodes[ 0 ].seoCompanyName }
             companyAddress={
-              data.localBusinessDE.nodes[0].seoCompanyStreetAddress
+              data.localBusinessDE.nodes[ 0 ].seoCompanyStreetAddress
             }
             companyPostalCode={
-              data.localBusinessDE.nodes[0].seoCompanyPostalcode
+              data.localBusinessDE.nodes[ 0 ].seoCompanyPostalcode
             }
-            companyCity={data.localBusinessDE.nodes[0].seoCompanyCity}
-            companyEmail={data.localBusinessDE.nodes[0].seoCompanyEmail}
-            companyPhone={data.localBusinessDE.nodes[0].seoCompanyTelephone}
+            companyCity={ data.localBusinessDE.nodes[ 0 ].seoCompanyCity }
+            companyEmail={ data.localBusinessDE.nodes[ 0 ].seoCompanyEmail }
+            companyPhone={ data.localBusinessDE.nodes[ 0 ].seoCompanyTelephone }
           />
         </Section>
       </main>
       <Footer
-        data={data.footerDE.nodes}
-        logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        data={ data.footerDE.nodes }
+        logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
         lang="de"
       />
     </Layout>
@@ -450,115 +514,99 @@ const IndexPage = ({ data, location }) => {
 export default IndexPage
 
 export const LayoutQuery = graphql`
-  query {
-    localBusinessDE: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        seoCompanyCity
-        seoCompanyDescription
-        seoCompanyEmail
-        seoCompanyImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyName
-        seoCompanyOpenTimeFriday
-        seoCompanyOpenTimeMonday
-        seoCompanyOpenTimeSaturday
-        seoCompanyOpenTimeSunday
-        seoCompanyOpenTimeThursday
-        seoCompanyOpenTimeTuesday
-        seoCompanyOpenTimeWednesday
-        seoCompanyPostalcode
-        seoCompanyPriceRange
-        seoCompanyService1Description
-        seoCompanyService1Name
-        seoCompanyService2Description
-        seoCompanyService2Name
-        seoCompanyService3Description
-        seoCompanyService3Name
-        seoCompanyState
-        seoCompanyStreetAddress
-        seoCompanyTelephone
-        seoUrl
-      }
-    }
-    seoDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    heroDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageHeroSlogan
-        homePageHeroSubtitle
-        homePageHeroTitle
-        homePageHeroBackgroundImage {
-          fluid(maxWidth: 800, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    authorDE: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
-      edges {
-        node {
-          authorBio {
-            childMarkdownRemark {
-              html
+    query {
+        seoDE: contentfulBlogPageHeroSection(node_locale: {eq: "de"}) {
+            blogPageTitle
+            blogPageSubtitle
+            blogPageSlogan
+            blogPageHeroImage {
+                fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
             }
-          }
-          authorImage {
-            fixed(width: 600, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
+        }
+        localBusinessDE: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                seoCompanyCity
+                seoCompanyDescription
+                seoCompanyEmail
+                seoCompanyImage {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyName
+                seoCompanyOpenTimeFriday
+                seoCompanyOpenTimeMonday
+                seoCompanyOpenTimeSaturday
+                seoCompanyOpenTimeSunday
+                seoCompanyOpenTimeThursday
+                seoCompanyOpenTimeTuesday
+                seoCompanyOpenTimeWednesday
+                seoCompanyPostalcode
+                seoCompanyPriceRange
+                seoCompanyService1Description
+                seoCompanyService1Name
+                seoCompanyService2Description
+                seoCompanyService2Name
+                seoCompanyService3Description
+                seoCompanyService3Name
+                seoCompanyState
+                seoCompanyStreetAddress
+                seoCompanyTelephone
+                seoUrl
             }
-          }
-          authorName
-          authorFacebook
-          authorInstagram
-          authorLinkedIn
-          authorTwitter
         }
-      }
+        authorDE: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
+            edges {
+                node {
+                    authorBio {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    authorImage {
+                        fixed(width: 600, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFixed_withWebp_noBase64
+                        }
+                    }
+                    authorName
+                    authorFacebook
+                    authorInstagram
+                    authorLinkedIn
+                    authorTwitter
+                }
+            }
+        }
+        footerDE: allContentfulFooterContent(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 60, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerDE: allContentfulFooterContent(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `

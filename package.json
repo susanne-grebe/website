@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "susanne-grebe-website",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "Susanne Grebe's company website for coaching.",
+  "version": "0.2.0",
+  "author": "Pascal Meers",
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -30,6 +30,7 @@
     "gatsby-plugin-sitemap": "^2.4.1",
     "gatsby-plugin-styled-components": "^3.2.4",
     "gatsby-plugin-transition-link": "^1.18.0",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-remark-images-contentful": "^2.2.5",
     "gatsby-source-contentful": "^2.2.10",
     "gatsby-source-filesystem": "^2.2.5",
@@ -54,24 +55,14 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "DEBUG=gatsby:query-watcher gatsby develop",
+    "develop": "DEBUG=gatsby:query-watcher gatsby develop -o -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }

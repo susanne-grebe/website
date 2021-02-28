@@ -32,6 +32,7 @@ const AboutTitle = styled.h2`
 
 const AboutBio = styled.p`
   font-size: 1.125rem;
+  font-weight: 400;
 `
 
 const SocialProfiles = styled.ul`
@@ -73,57 +74,57 @@ export default ({ data }) => {
     authorTwitter,
     authorFacebook,
     authorName,
-  } = data.nodes[0]
+  } = data.nodes[ 0 ]
   return (
     <AboutCard>
-      <AboutImage fluid={authorImage.fluid} />
-      <AboutTitle>{authorName}</AboutTitle>
+      <AboutImage fluid={ authorImage.fluid }/>
+      <AboutTitle>{ authorName }</AboutTitle>
       <AboutBio
-        dangerouslySetInnerHTML={{ __html: authorBio.childMarkdownRemark.html }}
+        dangerouslySetInnerHTML={ { __html: authorBio.childMarkdownRemark.html } }
       />
       <SocialProfiles>
         <SocialProfileItem>
           <a
-            href={authorFacebook}
+            href={ authorFacebook }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="facebook profile"
             title="susanne grebe's facebook"
           >
-            <FaFacebookSquare />
+            <FaFacebookSquare/>
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
           <a
-            href={authorInstagram}
+            href={ authorInstagram }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="instagram profile"
             title="susanne grebe's instagram"
           >
-            <FaInstagramSquare />
+            <FaInstagramSquare/>
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
           <a
-            href={authorLinkedIn}
+            href={ authorLinkedIn }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="linkedin profile"
             title="susanne grebe's linkedin"
           >
-            <FaLinkedin />
+            <FaLinkedin/>
           </a>
         </SocialProfileItem>
         <SocialProfileItem>
           <a
-            href={authorTwitter}
+            href={ authorTwitter }
             target="_blank"
             rel="noopener noreferrer"
             aria-label="twitter profile"
             title="susanne grebe's twitter"
           >
-            <FaTwitterSquare />
+            <FaTwitterSquare/>
           </a>
         </SocialProfileItem>
       </SocialProfiles>

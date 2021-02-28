@@ -1,53 +1,61 @@
 import React, { useContext } from "react"
 import { ThemeContext } from "styled-components"
 import styled from "@emotion/styled"
+import { Title as SectionTitle } from "../Title"
 
 import IconThree from "../../images/slice3.png"
 import IconTwo from "../../images/slice2.png"
 import IconOne from "../../images/slice1.png"
 
-import SectionHeader from "../section-header"
-
-const Overview = ({ overviewData }) => {
+export const Overview = ({ data }) => {
   const {
-    homePageOverviewFirstColNumber,
-    homePageOverviewFirstColTitle,
-    homePageOverviewHeading,
-    homePageOverviewSecondColNumber,
-    homePageOverviewSecondColTitle,
-    homePageOverviewThirdColNumber,
-    homePageOverviewThirdColTitle,
-  } = overviewData.nodes[0]
+    title,
+    col1Number,
+    col1Text,
+    col2Number,
+    col2Text,
+    col3Number,
+    col3Text,
+  } = data
 
   const Cards = [
     {
       img: IconThree,
-      num: homePageOverviewFirstColNumber,
-      title: homePageOverviewFirstColTitle,
+      num: col3Number,
+      title: col3Text,
     },
     {
       img: IconTwo,
-      num: homePageOverviewSecondColNumber,
-      title: homePageOverviewSecondColTitle,
+      num: col2Number,
+      title: col2Text,
     },
     {
       img: IconOne,
-      num: homePageOverviewThirdColNumber,
-      title: homePageOverviewThirdColTitle,
+      num: col1Number,
+      title: col1Text,
     },
   ]
 
   const theme = useContext(ThemeContext)
 
   const Section = styled.section`
-    padding-top: calc(${theme.paddings.top}rem * 2);
-    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-left: ${theme.paddings.left}rem;
-    padding-right: ${theme.paddings.right}rem;
-    position: relative;
+    margin: 0 auto;
+    padding: 50px 1.5rem 50px 1.5rem;
+    background-color: ${ theme.colors.background };
+  
+    @media (min-width: 768px) {
+      padding: 70px 1.5rem 70px 1.5rem;
+    }
+    
     @media (min-width: 992px) {
-      padding-top: ${theme.paddings.top}rem;
+      padding: 90px 1.5rem 90px 1.5rem;
+    }
+    
+    @media (min-width: 1280px) {
+      padding: 120px 1.5rem 120px 1.5rem;
     }
   `
 
@@ -55,16 +63,16 @@ const Overview = ({ overviewData }) => {
     display: flex;
     flex-direction: column;
     padding-top: 0;
-    padding-bottom: ${theme.paddings.bottom}rem;
-    max-width: ${theme.widths["container-width"]};
-    margin: ${theme.margins.top}rem ${theme.margins.center};
+    width: 100%;
+    max-width: ${ theme.widths[ "container-width" ] };
+    margin: ${ theme.margins.top }rem ${ theme.margins.center };
     @media (min-width: 768px) {
-      max-width: ${theme.widths["container-width-md"]};
+      max-width: ${ theme.widths[ "container-width-md" ] };
     }
     @media (min-width: 992px) {
       flex-direction: row;
       justify-content: space-between;
-      max-width: ${theme.widths["container-width-lg"]};
+      max-width: ${ theme.widths[ "container-width-lg" ] };
     }
   `
 
@@ -73,22 +81,22 @@ const Overview = ({ overviewData }) => {
     max-height: 125px;
     width: 100%;
     height: auto;
-    margin-bottom: calc(${theme.margins.bottom}rem / 1);
+    margin-bottom: calc(${ theme.margins.bottom }rem / 1);
     @media (min-width: 768px) {
       grid-area: i;
-      margin-right: calc(${theme.margins.right}rem * 5);
+      margin-right: calc(${ theme.margins.right }rem * 5);
       margin-bottom: 0;
     }
     @media (min-width: 992px) {
       width: 125px;
       margin-right: 0;
-      margin-bottom: ${theme.margins.bottom}rem;
+      margin-bottom: ${ theme.margins.bottom }rem;
     }
   `
 
   const Card = styled.div`
-    padding-top: ${theme.paddings.top}rem;
-    padding-bottom: ${theme.paddings.bottom}rem;
+    padding-top: ${ theme.paddings.top }rem;
+    padding-bottom: ${ theme.paddings.bottom }rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,9 +110,9 @@ const Overview = ({ overviewData }) => {
       &:nth-of-type(2n) {
         grid-template: "w i";
         text-align: center;
-        ${Img} {
+        ${ Img } {
           margin-right: 0;
-          margin-left: calc(${theme.margins.right}rem * 5);
+          margin-left: calc(${ theme.margins.right }rem * 5);
         }
       }
     }
@@ -115,7 +123,7 @@ const Overview = ({ overviewData }) => {
       grid-template: "i" "w";
       &:nth-of-type(2n) {
         grid-template: "i" "w";
-        ${Img} {
+        ${ Img } {
           margin-right: 0;
           margin-left: 0;
         }
@@ -130,9 +138,9 @@ const Overview = ({ overviewData }) => {
   `
 
   const Num = styled.p`
-    color: ${theme.colors["primary-active"]};
-    font-size: calc(${theme.fontSizes["body-small"]}rem * 3.6);
-    font-family: ${theme.fonts.headings};
+    color: ${ theme.colors[ "primary-active" ] };
+    font-size: calc(${ theme.fontSizes[ "body-small" ] }rem * 3.6);
+    font-family: ${ theme.fonts.headings };
     text-align: center;
     @media (min-width: 768px) {
       grid-area: n;
@@ -140,9 +148,9 @@ const Overview = ({ overviewData }) => {
   `
 
   const Title = styled.p`
-    font-size: calc(${theme.fontSizes["body-small"]}rem * 1.7);
-    font-weight: ${theme.fontWeights["body-bold"]};
-    font-family: ${theme.fonts.headings};
+    font-size: calc(${ theme.fontSizes[ "body-small" ] }rem * 1.7);
+    font-weight: ${ theme.fontWeights[ "body-bold" ] };
+    font-family: ${ theme.fonts.headings };
     @media (min-width: 768px) {
       grid-area: t;
     }
@@ -150,20 +158,18 @@ const Overview = ({ overviewData }) => {
 
   return (
     <Section>
-      <SectionHeader title={homePageOverviewHeading} />
+      <SectionTitle title={ title }/>
       <OverviewInner>
-        {Cards.map((card, index) => (
-          <Card key={index}>
-            <Img src={card.img} alt={card.title} loading="lazy" />
+        { Cards.map((card, index) => (
+          <Card key={ index }>
+            <Img src={ card.img } alt={ card.title } loading="lazy"/>
             <Wrap>
-              <Num>{card.num}</Num>
-              <Title>{card.title}</Title>
+              <Num>{ card.num }</Num>
+              <Title>{ card.title }</Title>
             </Wrap>
           </Card>
-        ))}
+        )) }
       </OverviewInner>
     </Section>
   )
 }
-
-export default Overview

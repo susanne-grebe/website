@@ -15,12 +15,9 @@ import {
 } from "react-icons/fa"
 
 import Layout from "../components/layout"
-
-import SEO from "../components/seo"
 import { JsonLd } from "../components/jsonld"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
 import SectionHeader from "../components/section-header/index"
 import GoogleMap from "../components/map/index"
 import Footer from "../components/footer/footer"
@@ -139,77 +136,77 @@ const NavItem = styled(Link)`
 `
 
 const SuccessPage = ({ data }) => {
-  const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: "Erfolgreich",
-        homePageHeroSubtitle: "Ich habe Ihre Nachricht erhalten.",
-        homePageHeroSlogan: "",
-        homePageHeroBackgroundImage:
-          data.localBusinessDE.nodes[0].seoCompanyImage,
-      },
-    ],
-  }
+  // const heroData = {
+  //   nodes: [
+  //     {
+  //       homePageHeroTitle: "Erfolgreich",
+  //       homePageHeroSubtitle: "Ich habe Ihre Nachricht erhalten.",
+  //       homePageHeroSlogan: "",
+  //       homePageHeroBackgroundImage:
+  //         data.localBusinessDE.nodes[0].seoCompanyImage,
+  //     },
+  //   ],
+  // }
 
   return (
     <Layout>
-      <SEO title="Kontakt" data={data.seoDE} lang="de" />
-      <JsonLd data={data.localBusinessDE.nodes[0]} />
-      <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={heroData} />
+      {/*<SEO title="Kontakt" data={data.seoDE} lang="de" />*/ }
+      <JsonLd data={ data.localBusinessDE.nodes[ 0 ] }/>
+      <Navbar logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
+              lang="de"/>
       <main className="main">
         <Section>
-          <SectionHeader title="Erfolgreich" />
+          <SectionHeader title="Erfolgreich"/>
 
           <SectionInner>
             <SectionContactInfo>
-              <h2>{data.authorDE.edges[0].node.authorName}</h2>
+              <h2>{ data.authorDE.edges[ 0 ].node.authorName }</h2>
               <AboutImg
-                fluid={data.localBusinessDE.nodes[0].seoCompanyImage.fluid}
+                fluid={ data.localBusinessDE.nodes[ 0 ].seoCompanyImage.fluid }
                 loading="lazy"
               />
               <p
-                dangerouslySetInnerHTML={{
+                dangerouslySetInnerHTML={ {
                   __html:
-                    data.authorDE.edges[0].node.authorBio.childMarkdownRemark
-                      .html,
-                }}
+                  data.authorDE.edges[ 0 ].node.authorBio.childMarkdownRemark
+                    .html,
+                } }
               />
               <SocialProfiles>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorFacebook}
+                    href={ data.authorDE.edges[ 0 ].node.authorFacebook }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaFacebookSquare />
+                    <FaFacebookSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorInstagram}
+                    href={ data.authorDE.edges[ 0 ].node.authorInstagram }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaInstagramSquare />
+                    <FaInstagramSquare/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorLinkedIn}
+                    href={ data.authorDE.edges[ 0 ].node.authorLinkedIn }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaLinkedin />
+                    <FaLinkedin/>
                   </a>
                 </SocialProfileItem>
                 <SocialProfileItem>
                   <a
-                    href={data.authorDE.edges[0].node.authorTwitter}
+                    href={ data.authorDE.edges[ 0 ].node.authorTwitter }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaTwitterSquare />
+                    <FaTwitterSquare/>
                   </a>
                 </SocialProfileItem>
               </SocialProfiles>
@@ -222,7 +219,7 @@ const SuccessPage = ({ data }) => {
               </p>
               <p>
                 In der Zwischenzeit finden Sie vielleicht eine Antwort in den
-                folgenden Abschnitten.{" "}
+                folgenden Abschnitten.{ " " }
               </p>
               <NavSection>
                 <NavItem to="/coaching-im-raum-aachen">Coaching</NavItem>
@@ -234,25 +231,25 @@ const SuccessPage = ({ data }) => {
           </SectionInner>
         </Section>
         <Section
-          style={{ paddingLeft: "0", paddingRight: "0", paddingBottom: "0" }}
+          style={ { paddingLeft: "0", paddingRight: "0", paddingBottom: "0" } }
         >
           <GoogleMap
-            companyName={data.localBusinessDE.nodes[0].seoCompanyName}
+            companyName={ data.localBusinessDE.nodes[ 0 ].seoCompanyName }
             companyAddress={
-              data.localBusinessDE.nodes[0].seoCompanyStreetAddress
+              data.localBusinessDE.nodes[ 0 ].seoCompanyStreetAddress
             }
             companyPostalCode={
-              data.localBusinessDE.nodes[0].seoCompanyPostalcode
+              data.localBusinessDE.nodes[ 0 ].seoCompanyPostalcode
             }
-            companyCity={data.localBusinessDE.nodes[0].seoCompanyCity}
-            companyEmail={data.localBusinessDE.nodes[0].seoCompanyEmail}
-            companyPhone={data.localBusinessDE.nodes[0].seoCompanyTelephone}
+            companyCity={ data.localBusinessDE.nodes[ 0 ].seoCompanyCity }
+            companyEmail={ data.localBusinessDE.nodes[ 0 ].seoCompanyEmail }
+            companyPhone={ data.localBusinessDE.nodes[ 0 ].seoCompanyTelephone }
           />
         </Section>
       </main>
       <Footer
-        data={data.footerDE.nodes}
-        logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        data={ data.footerDE.nodes }
+        logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
         lang="de"
       />
     </Layout>
@@ -262,115 +259,89 @@ const SuccessPage = ({ data }) => {
 export default SuccessPage
 
 export const LayoutQuery = graphql`
-  query {
-    localBusinessDE: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        seoCompanyCity
-        seoCompanyDescription
-        seoCompanyEmail
-        seoCompanyImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-        seoCompanyName
-        seoCompanyOpenTimeFriday
-        seoCompanyOpenTimeMonday
-        seoCompanyOpenTimeSaturday
-        seoCompanyOpenTimeSunday
-        seoCompanyOpenTimeThursday
-        seoCompanyOpenTimeTuesday
-        seoCompanyOpenTimeWednesday
-        seoCompanyPostalcode
-        seoCompanyPriceRange
-        seoCompanyService1Description
-        seoCompanyService1Name
-        seoCompanyService2Description
-        seoCompanyService2Name
-        seoCompanyService3Description
-        seoCompanyService3Name
-        seoCompanyState
-        seoCompanyStreetAddress
-        seoCompanyTelephone
-        seoUrl
-      }
-    }
-    seoDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    heroDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        homePageHeroSlogan
-        homePageHeroSubtitle
-        homePageHeroTitle
-        homePageHeroBackgroundImage {
-          fluid(quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    authorDE: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
-      edges {
-        node {
-          authorBio {
-            childMarkdownRemark {
-              html
+    query {
+        localBusinessDE: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                seoCompanyCity
+                seoCompanyDescription
+                seoCompanyEmail
+                seoCompanyImage {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
+                seoCompanyName
+                seoCompanyOpenTimeFriday
+                seoCompanyOpenTimeMonday
+                seoCompanyOpenTimeSaturday
+                seoCompanyOpenTimeSunday
+                seoCompanyOpenTimeThursday
+                seoCompanyOpenTimeTuesday
+                seoCompanyOpenTimeWednesday
+                seoCompanyPostalcode
+                seoCompanyPriceRange
+                seoCompanyService1Description
+                seoCompanyService1Name
+                seoCompanyService2Description
+                seoCompanyService2Name
+                seoCompanyService3Description
+                seoCompanyService3Name
+                seoCompanyState
+                seoCompanyStreetAddress
+                seoCompanyTelephone
+                seoUrl
             }
-          }
-          authorImage {
-            fixed(quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
+        }
+        authorDE: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
+            edges {
+                node {
+                    authorBio {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    authorImage {
+                        fixed(quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFixed_withWebp_noBase64
+                        }
+                    }
+                    authorName
+                    authorFacebook
+                    authorInstagram
+                    authorLinkedIn
+                    authorTwitter
+                }
             }
-          }
-          authorName
-          authorFacebook
-          authorInstagram
-          authorLinkedIn
-          authorTwitter
         }
-      }
+        footerDE: allContentfulFooterContent(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 600, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerDE: allContentfulFooterContent(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 600, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `

@@ -11,12 +11,12 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
-import Share from '../components/share'
+import Share from "../components/share"
 import PrevNext from "../components/prev-next-post/"
 import SidebarAbout from "../components/sidebar-about"
 import SidebarLatestPosts from "../components/sidebar-latest-posts"
 import Footer from "../components/footer/footer"
+import { Hero } from "../components/HomeHero"
 
 const Section = styled.article`
   position: relative;
@@ -55,6 +55,7 @@ const PostContent = styled.div`
   border-bottom: 1px solid #aa5d00;
   padding-bottom: 2rem;
   margin-bottom: 2rem;
+  font-weight: 400;
   p {
     margin-bottom: 1rem;
   }
@@ -86,65 +87,62 @@ const PostContent = styled.div`
 
 const BlogListPage = ({ data, pageContext }) => {
   const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: data.postsDE.edges[0].node.blogPostTitle,
-        homePageHeroSubtitle: "",
-        homePageHeroSlogan: data.postsDE.edges[0].node.blogPostDescription,
-        homePageHeroBackgroundImage: data.postsDE.edges[0].node.blogPostImage,
-      },
-    ],
+    title: data.postsDE.edges[ 0 ].node.blogPostTitle,
+    subTitle: "",
+    slogan: data.postsDE.edges[ 0 ].node.blogPostExcerpt.blogPostExcerpt,
+    backgroundImage: data.postsDE.edges[ 0 ].node.blogPostImage,
+    textRight: false,
+    overlay: true,
+    textLeftAlign: true,
   }
 
   const seoData = {
-    nodes: [
-      {
-        SeoTitle: data.postsDE.edges[0].node.blogPostTitle,
-        SeoKeywords: data.postsDE.edges[0].node.blogPostKeywords,
-        SeoDescription: data.postsDE.edges[0].node.blogPostDescription,
-        SeoImage: data.postsDE.edges[0].node.blogPostImage,
-      },
-    ],
+    title: `${ data.postsDE.edges[ 0 ].node.blogPostTitle } - Susanne Grebe`,
+    description: data.postsDE.edges[ 0 ].node.blogPostDescription,
+    keywords: data.postsDE.edges[ 0 ].node.blogPostKeywords,
+    image: data.postsDE.edges[ 0 ].node.blogPostImage,
   }
 
-  const path = `https://www.susanne-grebe.de/blog/${data.postsDE.edges[0].node.fields.slug}`
+  const path = `https://www.susanne-grebe.de/blog/${ data.postsDE.edges[ 0 ].node.fields.slug }`
 
   const ShareData = {
     url: path,
-    title: data.postsDE.edges[0].node.blogPostTitle
+    title: data.postsDE.edges[ 0 ].node.blogPostTitle,
   }
 
   return (
     <Layout>
-      <SEO title="Susanne Grebe" data={seoData} lang="de" path={path} />
-      <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={heroData} />
+      <SEO data={ seoData } lang="de" path={ path }/>
+      <Navbar logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
+              lang="de"/>
+      <Hero data={ heroData }/>
       <Wrapper>
         <main className="main">
-          {data.postsDE.edges.map(({ node }, index) => {
+          { data.postsDE.edges.map(({ node }, index) => {
             return (
-              <Section key={index}>
+              <Section key={ index }>
                 <PostContent
-                  dangerouslySetInnerHTML={{
+                  dangerouslySetInnerHTML={ {
                     __html: node.blogPostContent.childMarkdownRemark.html,
-                  }}
+                  } }
                 />
               </Section>
             )
-          })}
-          <Share data={ShareData} lang="de" />
-          <PrevNext prev={pageContext.prev} next={pageContext.next} lang="de" />
+          }) }
+          <Share data={ ShareData } lang="de"/>
+          <PrevNext prev={ pageContext.prev } next={ pageContext.next }
+                    lang="de"/>
         </main>
         <aside>
           <Section>
-            <SidebarAbout data={data.sidebarAbout} />
-            <SidebarLatestPosts data={data.sidebarLatestPostsDE} lang="de" />
+            <SidebarAbout data={ data.sidebarAbout }/>
+            <SidebarLatestPosts data={ data.sidebarLatestPostsDE } lang="de"/>
           </Section>
         </aside>
       </Wrapper>
       <Footer
-        data={data.footerDE.nodes}
-        logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        data={ data.footerDE.nodes }
+        logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
         lang="de"
       />
     </Layout>
@@ -152,123 +150,112 @@ const BlogListPage = ({ data, pageContext }) => {
 }
 
 export const BlogListQuery = graphql`
-  query($slug: String!) {
-    localBusinessDE: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
-    }
-    seoDE: allContentfulHomePage(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    postsDE: allContentfulBlogPost(
-      filter: { blogPostSlug: { eq: $slug }, node_locale: { eq: "de" } }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          blogPostExcerpt {
-            childMarkdownRemark {
-              html
+    query($slug: String!) {
+        localBusinessDE: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
             }
-          }
-          blogPostContent {
-            childMarkdownRemark {
-              html
+        }
+        postsDE: allContentfulBlogPost(
+            filter: { blogPostSlug: { eq: $slug }, node_locale: { eq: "de" } }
+        ) {
+            edges {
+                node {
+                    fields {
+                        slug
+                    }
+                    blogPostKeywords
+                    blogPostExcerpt {
+                        childMarkdownRemark {
+                            html
+                        }
+                        blogPostExcerpt
+                    }
+                    blogPostContent {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    blogPostDescription
+                    blogPostTitle
+                    blogPostImage {
+                        fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFluid_withWebp
+                        }
+                        description
+                    }
+                    createdAt(formatString: "DD-MM-YYYY")
+                }
             }
-          }
-          blogPostDescription
-          blogPostTitle
-          blogPostImage {
-            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFluid_withWebp
+        }
+        sidebarAbout: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
+            nodes {
+                authorBio {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                authorImage {
+                    fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                    description
+                }
+                authorInstagram
+                authorLinkedIn
+                authorName
+                authorTwitter
+                authorFacebook
             }
-            description
-          }
-          createdAt(formatString: "DD-MM-YYYY")
         }
-      }
-    }
-    sidebarAbout: allContentfulAuthor(filter: { node_locale: { eq: "de" } }) {
-      nodes {
-        authorBio {
-          childMarkdownRemark {
-            html
-          }
-        }
-        authorImage {
-          fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-        authorInstagram
-        authorLinkedIn
-        authorName
-        authorTwitter
-        authorFacebook
-      }
-    }
-    sidebarLatestPostsDE: allContentfulBlogPost(
-      filter: { node_locale: { eq: "de" } }
-      sort: { fields: createdAt, order: DESC }
-      limit: 3
-    ) {
-      edges {
-        node {
-          blogPostTitle
-          blogPostImage {
-            fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFluid_withWebp
+        sidebarLatestPostsDE: allContentfulBlogPost(
+            filter: { node_locale: { eq: "de" } }
+            sort: { fields: createdAt, order: DESC }
+            limit: 3
+        ) {
+            edges {
+                node {
+                    blogPostTitle
+                    blogPostImage {
+                        fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFluid_withWebp
+                        }
+                        description
+                    }
+                    blogPostSlug
+                }
             }
-            description
-          }
-          blogPostSlug
         }
-      }
+        footerDE: allContentfulFooterContent(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 60, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerDE: allContentfulFooterContent(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `
 
 export default BlogListPage

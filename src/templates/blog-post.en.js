@@ -11,12 +11,12 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import Navbar from "../components/navbar"
-import Hero from "../components/hero/hero"
-import Share from '../components/share'
+import Share from "../components/share"
 import PrevNext from "../components/prev-next-post/"
 import SidebarAbout from "../components/sidebar-about"
 import SidebarLatestPosts from "../components/sidebar-latest-posts"
 import Footer from "../components/footer/footer"
+import { Hero } from "../components/HomeHero"
 
 const Section = styled.article`
   position: relative;
@@ -31,10 +31,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   max-width: 540px;
   margin: 0 auto;
+  
   @media (min-width: 768px) {
-    max-width: 992px;
-  }
-  @media (min-width: 992px) {
     max-width: 1280px;
     flex-direction: row;
     main {
@@ -82,188 +80,173 @@ const PostContent = styled.div`
 
 const BlogListPage = ({ data, pageContext }) => {
   const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: data.postsEN.edges[0].node.blogPostTitle,
-        homePageHeroSubtitle: "",
-        homePageHeroSlogan: data.postsEN.edges[0].node.blogPostDescription,
-        homePageHeroBackgroundImage: data.postsEN.edges[0].node.blogPostImage,
-      },
-    ],
+    title: data.postsEN.edges[ 0 ].node.blogPostTitle,
+    subTitle: "",
+    slogan: data.postsEN.edges[ 0 ].node.blogPostExcerpt.blogPostExcerpt,
+    backgroundImage: data.postsEN.edges[ 0 ].node.blogPostImage,
+    textRight: false,
+    overlay: true,
+    textLeftAlign: true,
   }
 
   const seoData = {
-    nodes: [
-      {
-        SeoTitle: data.postsEN.edges[0].node.blogPostTitle,
-        SeoKeywords: data.postsEN.edges[0].node.blogPostKeywords,
-        SeoDescription: data.postsEN.edges[0].node.blogPostDescription,
-        SeoImage: data.postsEN.edges[0].node.blogPostImage,
-      },
-    ],
+    title: `${ data.postsEN.edges[ 0 ].node.blogPostTitle } - Susanne Grebe`,
+    keywords: data.postsEN.edges[ 0 ].node.blogPostKeywords,
+    description: data.postsEN.edges[ 0 ].node.blogPostDescription,
+    image: data.postsEN.edges[ 0 ].node.blogPostImage,
   }
 
-  const path = `https://www.susanne-grebe.de/en/blog/${data.postsEN.edges[0].node.fields.slug}`
+  const path = `https://www.susanne-grebe.de/en/blog/${ data.postsEN.edges[ 0 ].node.fields.slug }`
 
   const ShareData = {
     url: path,
-    title: data.postsEN.edges[0].node.blogPostTitle
+    title: data.postsEN.edges[ 0 ].node.blogPostTitle,
   }
 
   return (
     <Layout>
-      <SEO title="Susanne Grebe" data={seoData} lang="en" path={path} />
-      <Navbar logo={data.localBusinessEN.nodes[0].seoCompanyLogo} lang="en" />
-      <Hero heroData={heroData} />
+      <SEO data={ seoData } lang="en" path={ path }/>
+      <Navbar logo={ data.localBusinessEN.nodes[ 0 ].seoCompanyLogo }
+              lang="en"/>
+      <Hero data={ heroData }/>
       <Wrapper>
         <main className="main">
-          {data.postsEN.edges.map(({ node }, index) => {
+          { data.postsEN.edges.map(({ node }, index) => {
             return (
-              <Section key={index}>
+              <Section key={ index }>
                 <PostContent
-                  dangerouslySetInnerHTML={{
+                  dangerouslySetInnerHTML={ {
                     __html: node.blogPostContent.childMarkdownRemark.html,
-                  }}
+                  } }
                 />
               </Section>
             )
-          })}
-          <Share data={ShareData} lang="en" />
-          <PrevNext prev={pageContext.prev} next={pageContext.next} lang="en" />
+          }) }
+          <Share data={ ShareData } lang="en"/>
+          <PrevNext prev={ pageContext.prev } next={ pageContext.next }
+                    lang="en"/>
         </main>
         <aside>
           <Section>
-            <SidebarAbout data={data.sidebarAbout} />
-            <SidebarLatestPosts data={data.sidebarLatestPostsEN} lang="en" />
+            <SidebarAbout data={ data.sidebarAbout }/>
+            <SidebarLatestPosts data={ data.sidebarLatestPostsEN } lang="en"/>
           </Section>
         </aside>
       </Wrapper>
       <Footer
-        data={data.footerEN.nodes}
-        logo={data.localBusinessEN.nodes[0].seoCompanyLogo}
+        data={ data.footerEN.nodes }
+        logo={ data.localBusinessEN.nodes[ 0 ].seoCompanyLogo }
       />
     </Layout>
   )
 }
 
 export const BlogListQuery = graphql`
-  query($slug: String!) {
-    localBusinessEN: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "en" } }
-    ) {
-      nodes {
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
-    }
-    seoEN: allContentfulHomePage(filter: { node_locale: { eq: "en" } }) {
-      nodes {
-        SeoTitle
-        SeoKeywords
-        SeoDescription
-        SeoImage {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-      }
-    }
-    postsEN: allContentfulBlogPost(
-      filter: { blogPostSlug: { eq: $slug }, node_locale: { eq: "en" } }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          blogPostExcerpt {
-            childMarkdownRemark {
-              html
+    query($slug: String!) {
+        localBusinessEN: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "en" } }
+        ) {
+            nodes {
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
             }
-          }
-          blogPostContent {
-            childMarkdownRemark {
-              html
+        }
+        postsEN: allContentfulBlogPost(
+            filter: { blogPostSlug: { eq: $slug }, node_locale: { eq: "en" } }
+        ) {
+            edges {
+                node {
+                    fields {
+                        slug
+                    }
+                    blogPostExcerpt {
+                        childMarkdownRemark {
+                            html
+                        }
+                        blogPostExcerpt
+                    }
+                    blogPostContent {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    blogPostDescription
+                    blogPostTitle
+                    blogPostImage {
+                        fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFluid_withWebp
+                        }
+                        description
+                    }
+                    createdAt(formatString: "DD-MM-YYYY")
+                }
             }
-          }
-          blogPostDescription
-          blogPostTitle
-          blogPostImage {
-            fluid(maxWidth: 624, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFluid_withWebp
+        }
+        sidebarAbout: allContentfulAuthor(filter: { node_locale: { eq: "en" } }) {
+            nodes {
+                authorBio {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                authorImage {
+                    fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                    description
+                }
+                authorInstagram
+                authorLinkedIn
+                authorName
+                authorTwitter
+                authorFacebook
             }
-            description
-          }
-          createdAt(formatString: "DD-MM-YYYY")
         }
-      }
-    }
-    sidebarAbout: allContentfulAuthor(filter: { node_locale: { eq: "en" } }) {
-      nodes {
-        authorBio {
-          childMarkdownRemark {
-            html
-          }
-        }
-        authorImage {
-          fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-          description
-        }
-        authorInstagram
-        authorLinkedIn
-        authorName
-        authorTwitter
-        authorFacebook
-      }
-    }
-    sidebarLatestPostsEN: allContentfulBlogPost(
-      filter: { node_locale: { eq: "en" } }
-      sort: { fields: createdAt, order: DESC }
-      limit: 3
-    ) {
-      edges {
-        node {
-          blogPostTitle
-          blogPostImage {
-            fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFluid_withWebp
+        sidebarLatestPostsEN: allContentfulBlogPost(
+            filter: { node_locale: { eq: "en" } }
+            sort: { fields: createdAt, order: DESC }
+            limit: 3
+        ) {
+            edges {
+                node {
+                    blogPostTitle
+                    blogPostImage {
+                        fluid(maxWidth: 600, quality: 80, cropFocus: CENTER) {
+                            ...GatsbyContentfulFluid_withWebp
+                        }
+                        description
+                    }
+                    blogPostSlug
+                }
             }
-            description
-          }
-          blogPostSlug
         }
-      }
+        footerEN: allContentfulFooterContent(
+            filter: { node_locale: { eq: "en" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 60, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    footerEN: allContentfulFooterContent(
-      filter: { node_locale: { eq: "en" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `
 
 export default BlogListPage

@@ -3,18 +3,30 @@ import { ThemeContext } from "styled-components"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
-import SectionHeader from "../section-header"
+import { Title } from "../Title"
 
 export default ({ data, lang }) => {
   const theme = useContext(ThemeContext)
 
   const Section = styled.section`
-    position: relative;
-    padding-top: calc(${theme.paddings.top}rem * 2);
-    padding-bottom: calc(${theme.paddings.bottom}rem * 2);
-    padding-left: ${theme.paddings.left}rem;
-    padding-right: ${theme.paddings.right}rem;
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 50px 1.5rem 50px 1.5rem;
+  
+    @media (min-width: 768px) {
+      padding: 70px 1.5rem 70px 1.5rem;
+    }
+    
+    @media (min-width: 992px) {
+      padding: 90px 1.5rem 90px 1.5rem;
+    }
+    
+    @media (min-width: 1280px) {
+      padding: 120px 1.5rem 120px 1.5rem;
+    }
   `
 
   const SectionInner = styled.div`
@@ -24,13 +36,10 @@ export default ({ data, lang }) => {
     padding-right: 0;
     margin-left: auto;
     margin-right: auto;
-    max-width: ${theme.widths["container-width"]};
-    @media (min-width: 768px) {
-      max-width: ${theme.widths["container-width-sm"]};
-    }
+    margin-top: 50px;
+    width: 100%;
     @media (min-width: 1025px) {
       flex-direction: row;
-      max-width: ${theme.widths["container-width-lg"]};
       justify-content: space-between;
     }
   `
@@ -44,7 +53,9 @@ export default ({ data, lang }) => {
     max-width: calc(360px - 2rem) !important;
     width: 100% !important;
     height: 220px !important;
-    margin-bottom: ${theme.margins.bottom}rem;
+    margin-bottom: ${ theme.margins.bottom }rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 16%);
     @media (min-width: 375px) {
       min-width: calc(375px - 2rem) !important;
       max-width: calc(411px - 2rem) !important;
@@ -64,7 +75,7 @@ export default ({ data, lang }) => {
     @media (min-width: 1025px) {
       width: 375px !important;
       height: 280px !important;
-      margin-bottom: ${theme.margins.bottom}rem;
+      margin-bottom: ${ theme.margins.bottom }rem;
     }
   `
 
@@ -72,7 +83,7 @@ export default ({ data, lang }) => {
     display: flex;
     flex-direction: column;
     margin-top: 0;
-    margin-bottom: calc(${theme.margins.bottom}rem * 1);
+    margin-bottom: calc(${ theme.margins.bottom }rem * 1);
     height: 245px;
     h2 {
       font-size: 1.6rem;
@@ -91,30 +102,30 @@ export default ({ data, lang }) => {
     &:nth-of-type(3) {
       margin-bottom: 0;
     }
-    ${CardBody} {
+    ${ CardBody } {
       justify-content: space-between;
     }
     @media (min-width: 414px) {
       text-align: center;
-      ${CardBody} {
+      ${ CardBody } {
         height: 220px;
         padding: 0 1rem;
       }
     }
     @media (min-width: 768px) {
       flex-direction: row;
-      margin-bottom: calc(${theme.margins.bottom}rem * 3);
-      ${CardBody} {
-        padding-left: calc(${theme.paddings.left}rem * 2);
+      margin-bottom: calc(${ theme.margins.bottom }rem * 3);
+      ${ CardBody } {
+        padding-left: calc(${ theme.paddings.left }rem * 2);
         height: auto;
       }
       &:nth-of-type(2n) {
         flex-direction: row-reverse;
         text-align: center;
-        ${CardBody} {
+        ${ CardBody } {
           height: auto;
           padding-left: 0;
-          padding-right: calc(${theme.paddings.right}rem * 2);
+          padding-right: calc(${ theme.paddings.right }rem * 2);
         }
       }
     }
@@ -123,8 +134,8 @@ export default ({ data, lang }) => {
       width: 33%;
       max-width: 375px;
       text-align: center;
-      margin-bottom: calc(${theme.margins.bottom}rem * 0.5);
-      ${CardBody} {
+      margin-bottom: calc(${ theme.margins.bottom }rem * 0.5);
+      ${ CardBody } {
         padding: 0;
         height: 275px;
         justify-content: space-between;
@@ -133,7 +144,7 @@ export default ({ data, lang }) => {
         flex-direction: column;
         width: 33%;
         text-align: center;
-        ${CardBody} {
+        ${ CardBody } {
           padding: 0;
           height: 275px;
           justify-content: space-between;
@@ -143,55 +154,55 @@ export default ({ data, lang }) => {
   `
 
   const A = styled(Link)`
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
-    color: #aa5d00;
-    border: 1px solid #aa5d00;
-    border-radius: 5px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
+    max-width: 250px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: ${ theme.colors.primary };
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
     text-align: center;
-    &:hover,
-    &:focus {
-      background-color: #aa5d00;
-      border-color: #aa5d00;
-      color: #fff;
-    }
-    @media (min-width: 414px) {
-      margin: 0 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 16%);
+    
+    :hover, :focus {
+      color: #ffffff;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 16%);
     }
   `
 
   return (
     <Section>
-      <SectionHeader title="Latetst Posts" />
+      <Title
+        title={ lang === "de" ? "Neueste Beiträge" : "Latest Posts" }/>
       <SectionInner>
-        {data.edges.map(({ node }, index) => {
+        { data.edges.map(({ node }, index) => {
           const path =
             lang === "de"
-              ? `/blog/${node.blogPostSlug}`
-              : `/en/blog/${node.blogPostSlug}`
+              ? `/blog/${ node.blogPostSlug }`
+              : `/en/blog/${ node.blogPostSlug }`
           return (
-            <Card key={index}>
+            <Card key={ index }>
               <CardHeader>
                 <CardImg
-                  fluid={node.blogPostImage.fluid}
-                  alt={node.blogPostImage.description}
+                  fluid={ node.blogPostImage.fluid }
+                  alt={ node.blogPostImage.description }
                 />
               </CardHeader>
               <CardBody>
-                <h2>{node.blogPostTitle}</h2>
+                <h2>{ node.blogPostTitle }</h2>
                 <p
-                  dangerouslySetInnerHTML={{
+                  dangerouslySetInnerHTML={ {
                     __html: node.blogPostExcerpt.childMarkdownRemark.excerpt,
-                  }}
+                  } }
                 />
-                <A to={path}>{lang === "de" ? `Weiterlesen` : `Read More`}</A>
+                <A
+                  to={ path }>{ lang === "de" ? `Weiterlesen` : `Read More` }</A>
               </CardBody>
             </Card>
           )
-        })}
+        }) }
       </SectionInner>
     </Section>
   )

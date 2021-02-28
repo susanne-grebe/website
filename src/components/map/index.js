@@ -11,7 +11,7 @@ const SimpleMap = ({
   companyEmail,
   companyPhone,
 }) => {
-  const [show, setShow] = useState(true)
+  const [ show, setShow ] = useState(true)
 
   const onChildClickCallback = key => {
     setShow(!show)
@@ -29,17 +29,17 @@ const SimpleMap = ({
   return (
     <MapWrapper>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyBB7Ial0ifpSHaexRUGDC_JL-QVuOrYnzg" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
+        bootstrapURLKeys={ { key: "AIzaSyBB7Ial0ifpSHaexRUGDC_JL-QVuOrYnzg" } }
+        defaultCenter={ defaultProps.center }
+        defaultZoom={ defaultProps.zoom }
         yesIWantToUseGoogleMapApiInternals
-        onChildClick={() => onChildClickCallback()}
+        onChildClick={ () => onChildClickCallback() }
       >
         <MarkerPoint
-          lat={defaultProps.center.lat}
-          lng={defaultProps.center.lng}
-          show={show}
-          data={data}
+          lat={ defaultProps.center.lat }
+          lng={ defaultProps.center.lng }
+          show={ show }
+          data={ data }
         />
       </GoogleMapReact>
     </MapWrapper>
@@ -53,6 +53,10 @@ const MapWrapper = styled.div`
     height: 75vh;
   }
   @media (min-width: 992px) {
+    height: 70vh;
+  }
+  
+  @media (min-width: 1024px) {
     height: 50vh;
   }
 `
@@ -97,29 +101,29 @@ const MarkerListItem = styled.li`
 
 const MarkerComponent = ({ show, data }) => {
   return (
-    <Marker data-show={show.show}>
-      <MarkerTitle>{data.companyName}</MarkerTitle>
+    <Marker data-show={ show.show }>
+      <MarkerTitle>{ data.companyName }</MarkerTitle>
       <MarkerList>
-        <MarkerListItem>{data.companyAddress}</MarkerListItem>
+        <MarkerListItem>{ data.companyAddress }</MarkerListItem>
         <MarkerListItem>
-          {data.companyPostalCode}, {data.companyCity}
+          { data.companyPostalCode }, { data.companyCity }
         </MarkerListItem>
         <MarkerListItem>
           <a
-            href={`tel:${data.companyPhone}`}
+            href={ `tel:${ data.companyPhone }` }
             target="_blank"
             rel="noopener noreferrer"
           >
-            {data.companyPhone}
+            { data.companyPhone }
           </a>
         </MarkerListItem>
         <MarkerListItem>
           <a
-            href={`mailto:${data.companyEmail}`}
+            href={ `mailto:${ data.companyEmail }` }
             target="_blank"
             rel="noopener noreferrer"
           >
-            {data.companyEmail}
+            { data.companyEmail }
           </a>
         </MarkerListItem>
       </MarkerList>
@@ -148,8 +152,9 @@ const MarkerPoint = props => {
 
   return (
     <>
-      <div style={markerStyle} />
-      {props.show && <MarkerComponent show={props.show} data={props.data} />}
+      <div style={ markerStyle }/>
+      { props.show &&
+      <MarkerComponent show={ props.show } data={ props.data }/> }
     </>
   )
 }

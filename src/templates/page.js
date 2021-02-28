@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
 
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../components/layout"
@@ -9,23 +9,19 @@ import SectionHeader from "../components/section-header"
 import Navbar from "../components/navbar"
 
 import Footer from "../components/footer/footer"
-import Hero from "../components/hero/hero"
 import SEO from "../components/seo"
+import { Hero } from "../components/HomeHero"
 
-export default ({ data, pageContext }) => {
+export default ({ data }) => {
   const Section = styled.section`
     position: relative;
     padding-top: 3rem;
     padding-bottom: 3rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    &:nth-of-type(${data.allContentfulPageSection.edges.length}) {
+    &:nth-of-type(${ data.allContentfulPageSection.edges.length }) {
       padding-bottom: 6rem;
     }
-    &[data-layout="no-image"] {
-        padding-bottom: 8rem;
-        padding-top: 8rem;
-      }
     &[data-layout="true"] {
       padding-top: 6rem;
       padding-bottom: 6rem;
@@ -53,7 +49,7 @@ export default ({ data, pageContext }) => {
     }
     &[data-layout="true"] {
       flex-direction: column;
-      &${Section} {
+      &${ Section } {
         padding-bottom: 0;
       }
     }
@@ -61,7 +57,7 @@ export default ({ data, pageContext }) => {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      &${Section} {
+      &${ Section } {
         padding-bottom: 8rem !important;
         padding-top: 8rem !important;
       }
@@ -86,7 +82,7 @@ export default ({ data, pageContext }) => {
       &[data-layout="no-image"] {
         flex-direction: column;
         justify-content: center;
-        &${Section} {
+        &${ Section } {
           padding-bottom: 0;
         }
       }
@@ -117,7 +113,7 @@ export default ({ data, pageContext }) => {
       &[data-layout="no-image"] {
         flex-direction: column;
         justify-content: center;
-        &${Section} {
+        &${ Section } {
           padding-bottom: 0;
         }
       }
@@ -137,9 +133,6 @@ export default ({ data, pageContext }) => {
         }
       }
     }
-    @media (min-width: 1025px) {
-      max-width: 1280px;
-    }
   `
 
   const Skew = styled.div`
@@ -150,15 +143,7 @@ export default ({ data, pageContext }) => {
     z-index: 1;
     width: 100%;
     height: auto;
-    -webkit-clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
-    clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
     background-color: #fdfbf6;
-    @media (min-width: 768px) {
-      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
-    }
-    @media (min-width: 992px) {
-      clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
-    }
   `
 
   const Image = styled(Img)`
@@ -166,115 +151,74 @@ export default ({ data, pageContext }) => {
     margin-bottom: 2rem;
   `
 
-  const CTALink = styled(Link)`
-    font-size: 1rem;
-    padding: 0.5rem 1.5rem;
-    color: #aa5d00;
-    border: 1px solid #aa5d00;
-    border-radius: 5px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
-    margin: 0 auto;
-    text-align: center;
-    &:hover,
-    &:focus {
-      background-color: #aa5d00;
-      border-color: #aa5d00;
-      color: #fff;
-    }
-  `
+  console.log(data)
 
   const heroData = {
-    nodes: [
-      {
-        homePageHeroTitle: data.contentfulPage.pageTitle,
-        homePageHeroSubtitle: data.contentfulPage.pageSubTitle,
-        homePageHeroSlogan: data.contentfulPage.pageSlogan,
-        homePageHeroBackgroundImage:
-          data.contentfulPage.pageHeroBackgroundImage,
-      },
-    ],
+    title: data.contentfulPage.pageTitle,
+    subTitle: data.contentfulPage.pageSubTitle,
+    slogan: data.contentfulPage.pageSlogan,
+    backgroundImage: data.contentfulPage.pageHeroBackgroundImage,
+    textRight: false,
+    overlay: true,
   }
 
   const seoDE = {
-    nodes: [
-      {
-        SeoTitle: data.contentfulPage.seoTitle,
-        SeoKeywords: data.contentfulPage.seoKeywords,
-        SeoDescription: data.contentfulPage.seoDescription,
-        SeoImage: data.contentfulPage.seoImage,
-      },
-    ],
+    title: data.contentfulPage.seoTitle,
+    keywords: data.contentfulPage.seoKeywords,
+    description: data.contentfulPage.seoDescription,
+    image: data.contentfulPage.seoImage,
   }
 
-  const path = `https://www.susanne-grebe.de/${data.contentfulPage.pageSlug}`
+  const path = `https://www.susanne-grebe.de/${ data.contentfulPage.pageSlug }`
 
   return (
     <Layout>
-      <SEO title="Susanne Grebe" data={seoDE} lang="de" path={path} />
-      <Navbar logo={data.localBusinessDE.nodes[0].seoCompanyLogo} lang="de" />
-      <Hero heroData={heroData} />
-      {data.allContentfulPageSection.edges.map(({ node }, index) => {
+      <SEO title="Susanne Grebe" data={ seoDE } lang="de" path={ path }/>
+      <Navbar logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
+              lang="de"/>
+      <Hero data={ heroData }/>
+      { data.allContentfulPageSection.edges.map(({ node }, index) => {
         return node.pageSectionWithoutImage ? (
-          <Section key={index} data-layout="no-image">
-            {node.pageSectionSkewBackground ? <Skew /> : ""}
+          <Section key={ index } data-layout="no-image">
+            { node.pageSectionSkewBackground ? <Skew/> : "" }
             <SectionHeader
-              title={node.pageSectionHeading}
-              subTitle={node.pageSectionSubHeading}
+              title={ node.pageSectionHeading }
+              subTitle={ node.pageSectionSubHeading }
+              isPage={ true }
             />
             <SectionInner data-layout="no-image">
               <div
-                dangerouslySetInnerHTML={{
+                dangerouslySetInnerHTML={ {
                   __html: node.pageSectionContent.childMarkdownRemark.html,
-                }}
-              ></div>
+                } }
+              />
             </SectionInner>
           </Section>
         ) : (
-            <Section key={index} data-layout={node.pageImageRight}>
-              {node.pageSectionSkewBackground ? <Skew /> : ""}
-              <SectionHeader
-                title={node.pageSectionHeading}
-                subTitle={node.pageSectionSubHeading}
+          <Section key={ index } data-layout={ node.pageImageRight }>
+            { node.pageSectionSkewBackground ? <Skew/> : "" }
+            <SectionHeader
+              title={ node.pageSectionHeading }
+              subTitle={ node.pageSectionSubHeading }
+              isPage={ true }
+            />
+            <SectionInner data-layout={ node.pageImageRight }>
+              <div
+                dangerouslySetInnerHTML={ {
+                  __html: node.pageSectionContent.childMarkdownRemark.html,
+                } }
               />
-              <SectionInner data-layout={node.pageImageRight}>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: node.pageSectionContent.childMarkdownRemark.html,
-                  }}
-                ></div>
-                <Image
-                  fluid={node.pageSectionImage.fluid}
-                  alt={node.pageSectionImage.description}
-                />
-              </SectionInner>
-            </Section>
-          )
-      })}
-      {data.allContentfulPageCta.edges.length > 0 ? (
-        <Section
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            marginBottom: "3rem",
-          }}
-        >
-          <SectionHeader
-            title={data.allContentfulPageCta.edges[0].node.pageCtaTitle}
-            subTitle={data.allContentfulPageCta.edges[0].node.pageCtaContent}
-          />
-          <CTALink to="/kontakt">
-            {data.allContentfulPageCta.edges[0].node.pageCtaLinkText}
-          </CTALink>
-        </Section>
-      ) : (
-          ""
-        )}
+              <Image
+                fluid={ node.pageSectionImage.fluid }
+                alt={ node.pageSectionImage.description }
+              />
+            </SectionInner>
+          </Section>
+        )
+      }) }
       <Footer
-        data={data.footerDE.nodes}
-        logo={data.localBusinessDE.nodes[0].seoCompanyLogo}
+        data={ data.footerDE.nodes }
+        logo={ data.localBusinessDE.nodes[ 0 ].seoCompanyLogo }
         lang="de"
       />
     </Layout>
@@ -282,104 +226,80 @@ export default ({ data, pageContext }) => {
 }
 
 export const PageQuery = graphql`
-  query($slug: String!) {
-    localBusinessDE: allContentfulSeoLocalBusiness(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        seoCompanyLogo {
-          fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-            ...GatsbyContentfulFluid_withWebp
-          }
-        }
-      }
-    }
-    contentfulPage(pageSlug: { eq: $slug }, node_locale: { eq: "de" }) {
-      fields {
-        slug
-      }
-      pageTitle
-      pageSubTitle
-      pageSlug
-      pageSlogan
-      pageHeroBackgroundImage {
-        fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
-      }
-      seoDescription
-      seoKeywords
-      seoTitle
-      seoImage {
-        fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-          ...GatsbyContentfulFluid_withWebp_noBase64
-        }
-      }
-    }
-    allContentfulPageSection(
-      sort: { fields: createdAt, order: ASC }
-      filter: {
-        pageSectionShowOnPage: { pageSlug: { eq: $slug } }
-        node_locale: { eq: "de" }
-      }
-    ) {
-      edges {
-        node {
-          pageSectionHeading
-          pageSectionSubHeading
-          pageSectionSkewBackground
-          pageImageRight
-          pageSectionWithoutImage
-          pageSectionContent {
-            childMarkdownRemark {
-              html
+    query($slug: String!) {
+        localBusinessDE: allContentfulSeoLocalBusiness(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                seoCompanyLogo {
+                    fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                        ...GatsbyContentfulFluid_withWebp
+                    }
+                }
             }
-          }
-          pageSectionImage {
-            fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
+        }
+        contentfulPage(pageSlug: { eq: $slug }, node_locale: { eq: "de" }) {
+            fields {
+                slug
             }
-            description
-          }
+            pageTitle
+            pageSlug
+            pageHeroBackgroundImage {
+                fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                    ...GatsbyContentfulFluid_withWebp
+                }
+            }
+            seoDescription
+            seoTitle
+            seoImage {
+                fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
+                    ...GatsbyContentfulFluid_withWebp_noBase64
+                }
+            }
         }
-      }
+        allContentfulPageSection(
+            sort: { fields: createdAt, order: ASC }
+            filter: {
+                pageSectionShowOnPage: { pageSlug: { eq: $slug } }
+                node_locale: { eq: "de" }
+            }
+        ) {
+            edges {
+                node {
+                    pageSectionHeading
+                    pageSectionSkewBackground
+                    pageImageRight
+                    pageSectionWithoutImage
+                    pageSectionContent {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                }
+            }
+        }
+        footerDE: allContentfulFooterContent(
+            filter: { node_locale: { eq: "de" } }
+        ) {
+            nodes {
+                footerAddressBarPhoneNumber
+                footerAddressBarStreetAndNumber
+                footerAddressBarTitle
+                footerCopyright {
+                    childMarkdownRemark {
+                        html
+                    }
+                }
+                footerMiddleBarAboutMeContent
+                footerMiddleBarAboutMeLinkText
+                footerMiddleBarTopButtonText
+                footerMiddleBarLogo {
+                    fixed(width: 60, cropFocus: CENTER, quality: 80) {
+                        ...GatsbyContentfulFixed_withWebp_noBase64
+                    }
+                    description
+                }
+            }
+        }
     }
-    allContentfulPageCta(
-      filter: {
-        node_locale: { eq: "de" }
-        pageCtaShowOnPage: { pageSlug: { eq: $slug } }
-      }
-    ) {
-      edges {
-        node {
-          pageCtaContent
-          pageCtaLinkText
-          pageCtaTitle
-        }
-      }
-    }
-    footerDE: allContentfulFooterContent(
-      filter: { node_locale: { eq: "de" } }
-    ) {
-      nodes {
-        footerAddressBarPhoneNumber
-        footerAddressBarStreetAndNumber
-        footerAddressBarTitle
-        footerCopyright {
-          childMarkdownRemark {
-            html
-          }
-        }
-        footerMiddleBarAboutMeContent
-        footerMiddleBarAboutMeLinkText
-        footerMiddleBarTopButtonText
-        footerMiddleBarLogo {
-          fixed(width: 60, cropFocus: CENTER, quality: 80) {
-            ...GatsbyContentfulFixed_withWebp_noBase64
-          }
-          description
-        }
-      }
-    }
-  }
 `
