@@ -203,7 +203,7 @@ module.exports = {
       options: {
         custom: {
           families: [ "ITC Avant Garde Pro XLt", "ITC Avant Garde Pro Md" ],
-          urls: [ "/fonts/fonts.css" ],
+          urls: [ "fonts.css" ],
         },
       },
     },
