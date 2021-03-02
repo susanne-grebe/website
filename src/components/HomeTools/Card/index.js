@@ -62,8 +62,7 @@ export const Card = ({ card, lang }) => {
   const StyledList = styled.ul`
   
   `
-
-  console.log(sort)
+  
   return (
     <StyledCard>
       <div>
