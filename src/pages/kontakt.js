@@ -219,8 +219,10 @@ const SocialProfileItem = styled.li`
 
 const IndexPage = ({ data, location }) => {
   const [ checked, setChecked ] = useState(false)
-  const [ selectState, setSelectState ] = useState("Raum für Erfolg")
+  const [ selectState, setSelectState ] = useState(null)
   const [ locationState, setLocationState ] = useState(null)
+
+  const { name, namePlaceholder, email, emailPlaceholder, phoneNumber, phoneNumberPlaceholder, message, messagePlaceholder, subject, subjectLabel } = data.formFieldsDE
 
   useEffect(() => {
     if ( location.state ) {
@@ -341,121 +343,67 @@ const IndexPage = ({ data, location }) => {
               </FormGroup>
               <FormGroup className={ "no-margin-top" }>
                 <FormLabel htmlFor="name">
-                  <h3>Ihre Name</h3>
+                  <h3>{ name }</h3>
                 </FormLabel>
                 <FormInput
                   id="name"
                   type="text"
                   name="name"
-                  placeholder="e.g. Jane Doe"
-                  aria-label="Ihre Name"
+                  placeholder={ namePlaceholder }
+                  aria-label={ name }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="email">
-                  <h3>Ihre Email</h3>
+                  <h3>{ email }</h3>
                 </FormLabel>
                 <FormInput
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="e.g. example@email.com"
-                  aria-label="Ihre email"
+                  placeholder={ emailPlaceholder }
+                  aria-label={ email }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="phone">
-                  <h3>Ihre Rufnummer</h3>
+                  <h3>{ phoneNumber }</h3>
                 </FormLabel>
                 <FormInput
                   id="phone"
                   type="tel"
                   name="phone"
-                  placeholder="e.g. +49 123456789"
-                  aria-label="Ihre Rufnummer"
+                  placeholder={ phoneNumberPlaceholder }
+                  aria-label={ phoneNumber }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="thema">
-                  <h3>Ihr Thema</h3>
+                  <h3>{ subjectLabel }</h3>
                 </FormLabel>
                 <FormSelect name="thema" id="thema"
                             value={ selectState }
                             onChange={ handleSelectChange }>
-                  <FormSelectOption
-                    value="Coaching Angebote"
-                    aria-label="Caoching Angebote"
-                  >
-                    Coaching Angebote
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimikresonanz"
-                    aria-label="Mimikresonanz"
-                  >
-                    Mimikresonanz
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Raum für Erfolg - Monatlich"
-                    aria-label="Raum für Erfolg - Monatlich"
-                  >
-                    Raum für Erfolg - Monatlich
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Raum für Erfolg - Paket"
-                    aria-label="Raum für Erfolg - Paket"
-                  >
-                    Raum für Erfolg - Paket
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Coaching Einzel"
-                    aria-label="Coaching Einzel"
-                  >
-                    Coaching Einzel
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Coaching Paket"
-                    aria-label="Coaching Paket"
-                  >
-                    Coaching Paket
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Wissen Bonbon"
-                    aria-label="Wissen Bonbon"
-                  >
-                    Wissen Bonbon
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimik Einführungs"
-                    aria-label="Mimik Einführungs"
-                  >
-                    Mimik Einführungs
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimik Grundlegend"
-                    aria-label="Mimik Grundlegend"
-                  >
-                    Mimik Grundlegend
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimik Professional"
-                    aria-label="Mimik Professional"
-                  >
-                    Mimik Professional
-                  </FormSelectOption>
-                  <FormSelectOption value="other" aria-label="etwas anderes">
-                    Etwas anderes
-                  </FormSelectOption>
+                  { subject.map((doc, index) => (
+                    <FormSelectOption
+                      value={ doc }
+                      aria-label={ doc }
+                      key={ index }
+                    >
+                      { doc }
+                    </FormSelectOption>
+                  )) }
                 </FormSelect>
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="frage">
-                  <h3>Ihre Frage / Nachricht</h3>
+                  <h3>{ message }</h3>
                 </FormLabel>
                 <FormTextarea
                   id="frage"
                   name="message"
-                  placeholder="Ihre Frage"
-                  aria-label="Ihre Frage / Nachricht"
+                  placeholder={ messagePlaceholder }
+                  aria-label={ message }
                   rows="5"
                 />
               </FormGroup>
@@ -515,15 +463,17 @@ export default IndexPage
 
 export const LayoutQuery = graphql`
     query {
-        seoDE: contentfulBlogPageHeroSection(node_locale: {eq: "de"}) {
-            blogPageTitle
-            blogPageSubtitle
-            blogPageSlogan
-            blogPageHeroImage {
-                fluid(maxWidth: 520, quality: 80, cropFocus: CENTER) {
-                    ...GatsbyContentfulFluid_withWebp
-                }
-            }
+        formFieldsDE: contentfulContactFormFields(node_locale: {eq: "de"}) {
+            emailPlaceholder
+            email
+            message
+            messagePlaceholder
+            name
+            namePlaceholder
+            phoneNumber
+            phoneNumberPlaceholder
+            subjectLabel
+            subject
         }
         localBusinessDE: allContentfulSeoLocalBusiness(
             filter: { node_locale: { eq: "de" } }

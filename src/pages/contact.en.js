@@ -218,9 +218,11 @@ const SocialProfileItem = styled.li`
 
 const IndexPage = ({ data, location }) => {
   const [ checked, setChecked ] = useState(false)
-  const [ selectState, setSelectState ] = useState("Raum für Erfolg")
+  const [ selectState, setSelectState ] = useState(null)
   const [ locationState, setLocationState ] = useState(null)
-  
+
+  const { name, namePlaceholder, email, emailPlaceholder, phoneNumber, phoneNumberPlaceholder, message, messagePlaceholder, subject, subjectLabel } = data.formFieldsEN
+
   useEffect(() => {
     if ( location.state ) {
       setLocationState(location.state.choice)
@@ -339,114 +341,68 @@ const IndexPage = ({ data, location }) => {
               </FormGroup>
               <FormGroup className={ "no-margin-top" }>
                 <FormLabel htmlFor="name">
-                  <h3>Your Name</h3>
+                  <h3>{ name }</h3>
                 </FormLabel>
                 <FormInput
                   id="name"
                   type="text"
                   name="name"
-                  placeholder="e.g. Jane Doe"
-                  aria-label="Your Name"
+                  placeholder={ namePlaceholder }
+                  aria-label={ name }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="email">
-                  <h3>Your Email</h3>
+                  <h3>{ email }</h3>
                 </FormLabel>
                 <FormInput
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="e.g. example@email.com"
-                  aria-label="Your email"
+                  placeholder={ emailPlaceholder }
+                  aria-label={ email }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="phone">
-                  <h3>Your Phonenumber</h3>
+                  <h3>{ phoneNumber }</h3>
                 </FormLabel>
                 <FormInput
                   id="phone"
                   type="tel"
                   name="phone"
-                  placeholder="e.g. +49 123456789"
-                  aria-label="Your Phonenumber"
+                  placeholder={ phoneNumberPlaceholder }
+                  aria-label={ phoneNumber }
                 />
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="thema">
                   <h3>Your Subject</h3>
                 </FormLabel>
-                <FormSelect name="thema" id="thema" value={ selectState }
+                <FormSelect name="thema"
+                            id="thema"
+                            value={ selectState }
                             onChange={ handleSelectChange }>
-                  <FormSelectOption
-                    value="Coaching Offers"
-                    aria-label="Coaching Offers"
-                  >
-                    Coaching Offers
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Facial expression"
-                    aria-label="Facial expression"
-                  >
-                    Facial expression
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Space for success"
-                    aria-label="Space for success"
-                  >
-                    Space for success
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Coaching Individual"
-                    aria-label="Coaching Individual"
-                  >
-                    Coaching Individual
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Coaching Package"
-                    aria-label="Coaching Package"
-                  >
-                    Coaching Package
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Knowledge Candy"
-                    aria-label="Knowledge Candy"
-                  >
-                    Knowledge Candy
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimic Introduction"
-                    aria-label="Mimic Introduction"
-                  >
-                    Mimic Introduction
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimic Basic"
-                    aria-label="Mimic Basic"
-                  >
-                    Mimic Basic
-                  </FormSelectOption>
-                  <FormSelectOption
-                    value="Mimic Professional"
-                    aria-label="Mimic Professional"
-                  >
-                    Mimic Professional
-                  </FormSelectOption>
-                  <FormSelectOption value="other" aria-label="Something Else">
-                    Something Else
-                  </FormSelectOption>
+                  { subject.map((doc, index) => (
+                    <FormSelectOption
+                      value={ doc }
+                      aria-label={ doc }
+                      key={ index }
+                    >
+                      { doc }
+                    </FormSelectOption>
+                  )) }
                 </FormSelect>
               </FormGroup>
               <FormGroup>
                 <FormLabel htmlFor="frage">
-                  <h3>Your Question / Message</h3>
+                  <h3>{ message }</h3>
                 </FormLabel>
                 <FormTextarea
                   id="frage"
                   name="message"
-                  placeholder="Your question"
-                  aria-label="Your question"
+                  placeholder={ messagePlaceholder }
+                  aria-label={ message }
                   rows="5"
                 />
               </FormGroup>
@@ -505,6 +461,18 @@ export default IndexPage
 
 export const LayoutQuery = graphql`
     query {
+        formFieldsEN: contentfulContactFormFields(node_locale: {eq: "en"}) {
+            emailPlaceholder
+            email
+            message
+            messagePlaceholder
+            name
+            namePlaceholder
+            phoneNumber
+            phoneNumberPlaceholder
+            subjectLabel
+            subject
+        }
         localBusinessEN: allContentfulSeoLocalBusiness(
             filter: { node_locale: { eq: "en" } }
         ) {
